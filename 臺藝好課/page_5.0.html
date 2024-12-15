@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>臺藝好課-5.0登入</title>
+    <link rel="icon" href="./img/nav_pic.png"> 
+<style>
+  :root {
+  --primary-color: #ff5d5d;
+  --background-gradient: linear-gradient(to bottom, #000000, #fc5a40);
+  --text-color: #ffffff;
+  --input-bg: #ffffff;
+  --card-bg: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.3)
+  );
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: var(--background-gradient);
+  color: var(--text-color);
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky; /* 或用 position: fixed; */
+  top: 0; /* 将导航栏固定到页面顶部 */
+  z-index: 1000; /* 确保导航栏始终在前面 */
+  background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  }
+  
+  .navbar-logo {
+    margin-left: 205px;
+  }
+
+  .navbar-logo img {
+    width: 50%;
+    height: 50%;
+  }
+
+  .nav-container {
+  display: flex;
+  align-items: center;
+  margin-right: 205px;
+  }
+  
+  .main-nav {
+  display: flex;
+  gap: 1.5rem;
+  margin-right: 2rem;
+  }
+  
+  .nav-item {
+  position: relative;
+  }
+  
+  .nav-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s;
+  }
+  
+  .nav-link:hover {
+  color: var(--text-color);
+  }
+  
+  .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 200px;
+  background-color: #333;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  }
+  
+  .nav-item:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  }
+  
+  .dropdown-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: rgba(166, 166, 166, 0.7);
+  text-decoration: none;
+  transition: background-color 0.3s;
+  }
+  
+  .dropdown-item:hover {
+  background-color: #444;
+  color: #ffffff;
+  }
+  
+  .search-container {
+  position: relative;
+  width: 16rem;
+  }
+  
+  .search-input {
+  width: 100%;
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  }
+  
+  .search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.5);
+  }
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+}
+
+.login-container {
+  width: 1200px; /* Increased from 651px */
+  height: 600px; /* Increased from 402px */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.1)
+  );
+  backdrop-filter: blur(10px);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  box-sizing: border-box;
+}
+
+.card-content {
+  width: 429px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-icon {
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.user-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #000000;
+}
+
+.login-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.login-form {
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-input {
+  width: 100%;
+  height: 59px;
+  padding: 0 1rem;
+  border-radius: 9999px;
+  border: none;
+  background-color: var(--input-bg);
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+}
+
+.remember-checkbox {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--text-color);
+  background-color: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  position: relative;
+}
+
+.remember-checkbox:checked::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 0.8rem;
+}
+
+.remember-label {
+  font-size: 0.875rem;
+}
+
+.forgot-password {
+  font-size: 0.875rem;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.login-button {
+  width: 207px;
+  height: 59px;
+  background-color: rgba(255, 138, 138, 0.9);
+  color: var(--text-color);
+  border: none;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-button:hover {
+  background-color: rgba(255, 93, 93, 0.9);
+}
+
+footer {
+  background-color: black;  /* 黑色底色 */
+  color: white;             /* 白色文字 */
+  text-align: center;       /* 文字置中 */
+  padding: 5px 0;          /* 上下內邊距 */        /* 固定在頁面底部 */
+  bottom: 0;
+  width: 100%;              /* 佔滿整個頁面寬度 */
+  height: 70px;
+}
+
+footer p {
+  margin: 16px 0px;
+}
+#togglePassword {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+</style>
+
+  </head>
+  <body>
+    <header class="header">
+      <div class="navbar-logo">
+        <a href="index.html">
+      <img src="./img/nav_pic.png">
+    </a>
+      </div>
+      <div class="nav-container">
+        <nav class="main-nav">
+          <div class="nav-item">
+            <a href="page_6.0.html" class="nav-link">選課須知</a>
+          </div>
+
+          <div class="nav-item">
+            <a href="page_3.0.html" class="nav-link">院系/通識課程</a>
+            <div class="dropdown">
+              <a href="page_3.0.html" class="dropdown-item">設計學院</a>
+              <a href="page_3.0.html" class="dropdown-item">美術學院</a>
+              <a href="page_3.0.html" class="dropdown-item">傳播學院</a>
+              <a href="page_3.0.html" class="dropdown-item">表演學院</a>
+              <a href="page_3.0.html" class="dropdown-item">人文學院</a>
+              <a href="page_3.0.html" class="dropdown-item">體育學院</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="./page_3.2.html" class="nav-link">課程討論</a>
+            <div class="dropdown">
+              <a href="./page_1.1.html" class="dropdown-item">討論區</a>
+              <a href="page_2.0.html" class="dropdown-item">最高評價</a>
+              <a href="page_1.0.html" class="dropdown-item">熱門討論</a>
+            </div>
+          </div>
+          <div class="nav-item">
+              <a href="./page_4.0.html" class="nav-link">換課區</a>
+              <div class="dropdown">
+                <a href="./page_4.0.html" class="dropdown-item">許願</a>
+                <a href="./page_4.1.html" class="dropdown-item">交換</a>
+              </div>
+            </div>
+          <a href="page_5.0.html" class="nav-link">登入</a>
+        </nav>
+
+      </div>
+    </header>
+
+      <!-- Login Form -->
+      <main class="main-content">
+        <div class="login-container">
+          <div class="login-card">
+            <div class="card-content">
+              <div class="user-icon">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <h2 class="login-title">登入帳號</h2>
+              <form id="loginForm" class="login-form">
+                <div class="form-group">
+                  <label for="username" class="form-label">帳號</label>
+                  <input
+                    id="username"
+                    type="text"
+                    required
+                    class="form-input"
+                    placeholder="輸入學號"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="password" class="form-label">密碼</label>
+                  <div style="position: relative">
+                    <input
+                      id="password"
+                      type="password"
+                      required
+                      class="form-input"
+                      placeholder="輸入密碼"
+                    />
+                    <span
+                      id="togglePassword"
+                      style="
+                        position: absolute;
+                        right: 10px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        cursor: pointer;
+                      "
+                    >
+                      <img
+                        src="./img/openEye.svg"
+                        alt="Toggle Password Visibility"
+                      />
+                    </span>
+                  </div>
+                </div>
+
+                <div class="form-options">
+                  <div class="remember-me">
+                    <input
+                      id="remember"
+                      type="checkbox"
+                      class="remember-checkbox"
+                    />
+                    <label for="remember" class="remember-label"
+                      >記住我，保持登入</label
+                    >
+                  </div>
+                  <a href="#" class="forgot-password">忘記密碼?</a>
+                </div>
+                <div class="button-container">
+                  <a href="page_5.1.html">
+                  <button class="login-button"   onclick="location.href='./page_5.1.html';" >登入</button>
+                </a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <footer>
+      <p>&copy; 220307新北市板橋區大觀路一段59號&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;電話：02-2272-2181&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;學校網址：https://www.ntua.edu.tw/</p>
+    </footer>
+    </div>
+    <script>
+      const togglePassword = document.getElementById("togglePassword");
+      const passwordInput = document.getElementById("password");
+
+      togglePassword.addEventListener("click", () => {
+        const type = passwordInput.type === "password" ? "text" : "password";
+        passwordInput.type = type;
+        togglePassword.querySelector("img").src =
+          type === "text" ? "./img/openEye.svg" : "./img/closeEye.svg";
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+  const loginForm = document.getElementById("loginForm");
+  const togglePassword = document.getElementById("togglePassword");
+  const passwordField = document.getElementById("password");
+
+  // 路徑到您的圖片
+  const openEyePath = "./img/openEye.svg";
+  const closeEyePath = "./img/closeEye.svg";
+
+  // 切換密碼顯示和圖片
+  togglePassword.addEventListener("click", function () {
+    const isPassword = passwordField.type === "password";
+    passwordField.type = isPassword ? "text" : "password";
+
+    // 切換圖片
+    togglePassword.querySelector("img").src = isPassword
+      ? openEyePath // 當密碼隱藏時（即將要顯示），顯示關閉的眼睛
+      : closeEyePath; // 當密碼顯示時（即將要隱藏），顯示打開的眼睛
+  });
+
+  loginForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    const remember = document.getElementById("remember").checked;
+
+    console.log("Login attempt:", { username, password, remember });
+  });
+});
+
+    </script>
+  </body>
+</html>

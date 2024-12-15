@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>臺藝好課-4.0換課區-許願</title>
+
+    <link rel="icon" href="./img/nav_pic.png"> 
+
+    <style>
+      * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #000;
+  color: #333;
+  background-image: url(./img/background.png);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky; /* 或用 position: fixed; */
+  top: 0; /* 将导航栏固定到页面顶部 */
+  z-index: 1000; /* 确保导航栏始终在前面 */
+  background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  }
+  
+  .navbar-logo {
+    margin-left: 205px;
+  }
+
+  .navbar-logo img {
+    width: 50%;
+    height: 50%;
+  }
+
+  .nav-container {
+  display: flex;
+  align-items: center;
+  margin-right: 205px;
+  }
+  
+  .main-nav {
+  display: flex;
+  gap: 1.5rem;
+  margin-right: 2rem;
+  }
+  
+  .nav-item {
+  position: relative;
+  }
+  
+  .nav-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s;
+  }
+  
+  .nav-link:hover {
+  color: var(--text-color);
+  }
+  
+  .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 200px;
+  background-color: #000000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  }
+  
+  .nav-item:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  border-radius: 5px;
+  }
+  
+  .dropdown-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: rgba(166, 166, 166, 0.7);
+  text-decoration: none;
+  transition: background-color 0.3s;
+  }
+  
+  .dropdown-item:hover {
+  background-color: #242424;
+  color: #ffffff;
+  }
+  
+  .search-container {
+  position: relative;
+  width: 16rem;
+  }
+  
+  .search-input {
+  width: 100%;
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  }
+  
+  .search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.5);
+  }
+  
+.bread {
+  display: flex;
+  align-items: center; /* 垂直居中對齊 */
+  gap: 8px; /* 每個元素的間距 */
+  font-size: 14px; /* 調整文字大小 */
+  color: white; /* 文字顏色 */
+  padding: 1rem 0;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center; /* 確保圖標與文字垂直居中 */
+  text-decoration: none; /* 去掉超連結下劃線 */
+  color: inherit; /* 繼承父容器文字顏色 */
+}
+
+.breadcrumb-item img {
+  width: 16px; /* 調整圖標大小 */
+  height: 16px;
+  margin-right: 4px; /* 圖標和文字的間距 */
+}
+
+.breadcrumb-separator {
+  color: white; /* 分隔符顏色 */
+  margin: 0 8px; /* 分隔符的間距 */
+  font-size: 16px;
+}
+.search-bar {
+  padding: 1rem 0 0;
+  display: flex;
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.dropdown-input {
+  background-color: #333 !important;
+  color: #fff;
+  padding-left: 40px !important;
+  background-image: url(../img/search.svg); /* 替換為你的SVG文件路徑 */
+  background-repeat: no-repeat;
+  background-size: 20px 20px; /* 圖標大小 */
+  background-position: 10px center; /* 圖標位置 */
+}
+.small-dropdown {
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 70px;
+}
+
+.search-input {
+  padding: 0.5rem;
+  border-radius: 70px;
+  border: 1px solid #666;
+}
+
+.smallsearch {
+  text-align: right;
+}
+.dropdown-input {
+  padding: 0.5rem;
+  border-radius: 70px;
+  border: 1px solid #666;
+  background-color: #d9d9d9;
+}
+.favorite-button {
+  padding: 0.5rem;
+  border-radius: 70px;
+  border: 1px solid #666;
+}
+.link-button {
+  padding: 0.5rem;
+  border-radius: 70px;
+  border: 1px solid #666;
+}
+.comment-button {
+  padding: 0.5rem;
+  border-radius: 70px;
+  border: 1px solid #666;
+}
+.share-button {
+  padding: 0.5rem;
+  border-radius: 70px;
+  border: 1px solid #666;
+}
+.collect-button {
+  padding: 0.5rem;
+  border-radius: 70px;
+  border: 1px solid #666;
+}
+
+/* 整體容器 */
+.post-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  padding: 10px 15px;
+  /* background-color: #fff; */
+  background: linear-gradient(rgba(76, 76, 76, 0.9), rgba(0, 0, 0, 0.5));
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  margin: 1rem auto;
+  max-width: 800px;
+  padding: 1rem;
+}
+/* 輸入區域 */
+.post-input {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.post-input .icon-pencil {
+  margin-right: 10px;
+  color: #ccc;
+}
+
+.post-input input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #666;
+  background: transparent;
+  padding: 5px 0;
+}
+
+/* 底部操作區 */
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 圖標樣式 */
+button {
+  background-color: transparent;
+  cursor: pointer;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  border: none;
+}
+.action-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.action-icons .icon {
+  font-size: 18px;
+  color: #ff5a4b;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.action-icons .icon:hover {
+  transform: scale(1.1);
+}
+
+/* 發佈按鈕 */
+.post-button {
+  padding: 8px 20px;
+  font-size: 16px;
+  background-color: #ff5a4b;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.post-button:hover {
+  background-color: #e04a3c;
+}
+
+.course-cards {
+  column-count: 2; /* 設置兩列 */
+  column-gap: 20px; /* 設置列之間的間距 */
+  max-width: 800px;
+  margin: 0 auto; /* 水平居中 */
+  padding: 20px 0px;
+}
+
+.course-card {
+  background-color: #d9d9d9;
+  color: #09090b;
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* 卡片之間的垂直間距 */
+  break-inside: avoid; /* 防止卡片被拆分 */
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  /* justify-content: space-between; */
+  align-items: center;
+}
+/* .user-head-name {
+  display: inline-block;
+  white-space: nowrap;
+  align-items: center;
+} */
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin: 1px;
+  display: inline-block;
+}
+.info-container {
+  white-space: nowrap; /* 防止子元素換行 */
+  justify-content: space-between;
+}
+.user-name {
+  margin-bottom: 2rem;
+  display: inline-block;
+}
+.status-tag-container {
+  display: inline-block; /* 設置子元素為行內區塊 */
+  padding-left: 7rem;
+}
+.status-tag-container dt {
+  padding: 0.5rem;
+}
+.status-tag-container dd {
+  padding: 0.5rem;
+  display: flex;
+  /* 水平置中 */
+  justify-content: center;
+  /* 垂直置中 */
+  align-items: center;
+}
+.status-tag-container p {
+  text-align: center;
+  font-size: small;
+  margin-top: 5px;
+}
+.course-details {
+  margin: 1rem 0;
+}
+
+.course-details dt {
+  float: left;
+  clear: left;
+  width: 80px;
+  font-weight: bold;
+  background-color: #cecece;
+  border-radius: 20px;
+  padding: 0.3rem 0;
+  display: flex;
+  /* 水平置中 */
+  justify-content: center;
+  /* 垂直置中 */
+  align-items: center;
+}
+
+.course-details dd {
+  margin-left: 90px;
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0;
+}
+.comment-caption {
+  padding: 1rem 0;
+}
+.change-word {
+  text-align: center;
+  padding: 2rem 0px;
+  color: #424242;
+}
+.comment-hashtag-container {
+  padding: 1rem 0;
+}
+.comment-hashtag {
+  background-color: #262626;
+  padding: 0.3rem 1rem;
+  border-radius: 20px;
+  color: #fff;
+}
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.action-button {
+  background: none;
+  border: 1px solid #bcbaba;
+  border-radius: 9px;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.status-tag {
+  background-color: #bcbaba;
+  padding: 0.3rem 1.5rem;
+  border-radius: 20px;
+}
+
+footer {
+  background-color: black;  /* 黑色底色 */
+  color: white;             /* 白色文字 */
+  text-align: center;       /* 文字置中 */
+  padding: 5px 0;          /* 上下內邊距 */        /* 固定在頁面底部 */
+  bottom: 0;
+  width: 100%;              /* 佔滿整個頁面寬度 */
+  height: 70px;
+}
+
+footer p {
+  padding-top: 30px;
+  bottom: 0px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.map-container {
+  background-color: #e0e0e0;
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 800px;
+}
+
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
+
+
+    </style>
+
+  </head>
+  <body>
+    <header class="header">
+      <div class="navbar-logo">
+        <a href="index.html">
+      <img src="./img/nav_pic.png">
+    </a>
+      </div>
+      <div class="nav-container">
+        <nav class="main-nav">
+          <div class="nav-item">
+            <a href="page_6.0.html" class="nav-link">選課須知</a>
+          </div>
+
+          <div class="nav-item">
+            <a href="page_3.0.html" class="nav-link">院系/通識課程</a>
+            <div class="dropdown">
+              <a href="page_3.0.html" class="dropdown-item">設計學院</a>
+              <a href="page_3.0.html" class="dropdown-item">美術學院</a>
+              <a href="page_3.0.html" class="dropdown-item">傳播學院</a>
+              <a href="page_3.0.html" class="dropdown-item">表演學院</a>
+              <a href="page_3.0.html" class="dropdown-item">人文學院</a>
+              <a href="page_3.0.html" class="dropdown-item">體育學院</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="./page_3.2.html" class="nav-link">課程討論</a>
+            <div class="dropdown">
+              <a href="./page_1.1.html" class="dropdown-item">討論區</a>
+              <a href="page_2.0.html" class="dropdown-item">最高評價</a>
+              <a href="page_1.0.html" class="dropdown-item">熱門討論</a>
+            </div>
+          </div>
+          <div class="nav-item">
+              <a href="./page_4.0.html" class="nav-link">換課區</a>
+              <div class="dropdown">
+                <a href="./page_4.0.html" class="dropdown-item">許願</a>
+                <a href="./page_4.1.html" class="dropdown-item">交換</a>
+              </div>
+            </div>
+          <a href="page_5.0.html" class="nav-link">登入</a>
+        </nav>
+
+      </div>
+    </header>
+
+    <div class="bread">
+      <a href="#" class="breadcrumb-item">
+        <img src="./img/home.png" alt="Home Icon" />
+        <span>首頁</span>
+      </a>
+      <span class="breadcrumb-separator">></span>
+      <a href="#" class="breadcrumb-item">
+        <span>換課區</span>
+      </a>
+    </div>
+
+    <div class="search-bar">
+      <div class="filters">
+        <select class="small-dropdown">
+          <option>課程類別</option>
+          <option>人文</option>
+          <option>社會</option>
+          <option>自然</option>
+        </select>
+        <select class="small-dropdown">
+          <option>上課時間</option>
+          <option>(一)1-2</option>
+          <option>(一)3-4</option>
+          <option>(一)5-6</option>
+          <option>(一)7-8</option>
+        </select>
+        <select class="small-dropdown">
+          <option>換課形式</option>
+          <option>課換課</option>
+          <option>求課</option>
+          <option>讓課</option>
+        </select>
+      </div>
+      <div class="smallsearch">
+        <input type="search" placeholder="關鍵字查詢" class="dropdown-input" />
+      </div>
+    </div>
+
+    <div class="post-container">
+      <div class="post-input">
+        <span class="icon-pencil">
+          <img
+            src="./img/orange_pencil.svg"
+            width="21"
+            height="17"
+            alt="Pencil Icon"
+          />
+        </span>
+        <input type="text" placeholder="有什麼新鮮事？! ..." />
+      </div>
+      <div class="post-actions">
+        <div class="action-icons">
+          <button>
+            <img
+              src="./img/orange_photo.svg"
+              width="21"
+              height="18"
+              alt="Photo Icon"
+            />
+          </button>
+          <button>
+            <img
+              src="./img/orange_common.svg"
+              width="21"
+              height="17"
+              alt="Comment Icon"
+            />
+          </button>
+          <button>
+            <img
+              src="./img/orange_link.svg"
+              width="24"
+              height="24"
+              alt="Link Icon"
+            />
+          </button>
+          <button>
+            <img
+              src="./img/orange_share.svg"
+              width="21"
+              height="21"
+              alt="Share Icon"
+            />
+          </button>
+        </div>
+        <button class="post-button">發佈</button>
+      </div>
+    </div>
+
+    <div class="course-cards">
+      <div class="course-card">
+        <div class="user-info">
+          <div class="user-avatar">
+            <img
+              src="./img/usericon.svg"
+              width="40"
+              height="40"
+              alt="User Icon"
+            />
+          </div>
+          <div class="info-container">
+            <div class="user-name">
+              <span>user01234</span>
+            </div>
+
+            <div class="status-tag-container">
+              <div class="status-tag">求課</div>
+              <p>3小時</p>
+            </div>
+          </div>
+        </div>
+        <h1>我想要的課程：</h1>
+        <br />
+        <dl class="course-details">
+          <dt>科目</dt>
+          <dd>網站設計與數位剪輯</dd>
+          <dt>課程類別</dt>
+          <dd>專選修</dd>
+          <dt>課程代碼</dt>
+          <dd>VCD213</dd>
+          <dt>上課時間</dt>
+          <dd>(一)6-8</dd>
+          <dt>授課教師</dt>
+          <dd>林昱萱</dd>
+        </dl>
+
+        <div class="comment-caption">
+          <p>我是外系同學，聽朋友分享感覺很實用，一直很想上上看但是選不到。</p>
+          <p>可多換一或用三杯星巴克/COWBANANA/等價其他東西換。</p>
+          <p>祝同學們選課順利~</p>
+          <div class="comment-hashtag-container">
+            <span class="comment-hashtag">#cow8</span>
+            <span class="comment-hashtag">#星8克</span>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="action-button">
+            <img
+              src="./img/Vector.svg"
+              width="20"
+              height="15"
+              alt="Like Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/comment.svg"
+              width="20"
+              height="15"
+              alt="Comment Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img src="./img/link.svg" width="25" height="15" alt="Link Icon" />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/share.svg"
+              width="25"
+              height="15"
+              alt="Share Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/collect.svg"
+              width="20"
+              height="15"
+              alt="Collect Icon"
+            />
+          </button>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="user-info">
+          <div class="user-avatar">
+            <img
+              src="./img/usericon.svg"
+              width="40"
+              height="40"
+              alt="User Icon"
+            />
+          </div>
+          <div class="info-container">
+            <div class="user-name">
+              <span>user01234</span>
+            </div>
+
+            <div class="status-tag-container">
+              <div class="status-tag">釋出</div>
+              <p>7小時</p>
+            </div>
+          </div>
+        </div>
+        <h1>我想要的課程：</h1>
+        <br />
+        <dl class="course-details">
+          <dt>科目</dt>
+          <dd>現代散文創作與欣賞</dd>
+          <dt>課程類別</dt>
+          <dd>人文</dd>
+          <dt>課程代碼</dt>
+          <dd>GEC125</dd>
+          <dt>上課時間</dt>
+          <dd>(一)9-10</dd>
+          <dt>授課教師</dt>
+          <dd>楊瀅靜</dd>
+        </dl>
+
+        <div class="comment-caption">
+          <p>選完才發現卡到打工，希望能換成(一)3-4的課</p>
+          <div class="comment-hashtag-container">
+            <!-- <span class="comment-hashtag">#cow8</span>
+            <span class="comment-hashtag">#星8克</span> -->
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="action-button">
+            <img
+              src="./img/Vector.svg"
+              width="20"
+              height="15"
+              alt="Like Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/comment.svg"
+              width="20"
+              height="15"
+              alt="Comment Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img src="./img/link.svg" width="25" height="15" alt="Link Icon" />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/share.svg"
+              width="25"
+              height="15"
+              alt="Share Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/collect.svg"
+              width="20"
+              height="15"
+              alt="Collect Icon"
+            />
+          </button>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="user-info">
+          <div class="user-avatar">
+            <img
+              src="./img/usericon.svg"
+              width="40"
+              height="40"
+              alt="User Icon"
+            />
+          </div>
+          <div class="info-container">
+            <div class="user-name">
+              <span>user01234</span>
+            </div>
+
+            <div class="status-tag-container">
+              <div class="status-tag">課換課</div>
+              <p>13小時</p>
+            </div>
+          </div>
+        </div>
+        <h1>我想要的課程：</h1>
+        <br />
+        <dl class="course-details">
+          <dt>科目</dt>
+          <dd>現代散文創作與欣賞</dd>
+          <dt>課程類別</dt>
+          <dd>人文</dd>
+          <dt>課程代碼</dt>
+          <dd>GEC125</dd>
+          <dt>上課時間</dt>
+          <dd>(一)9-10</dd>
+          <dt>授課教師</dt>
+          <dd>楊瀅靜</dd>
+        </dl>
+        <div class="change-word"><p>換</p></div>
+        <dl class="course-details">
+          <dt>科目</dt>
+          <dd>藝術市場與藝術管理</dd>
+          <dt>課程類別</dt>
+          <dd>社會</dd>
+          <dt>課程代碼</dt>
+          <dd>GEC155</dd>
+          <dt>上課時間</dt>
+          <dd>(三)3-4</dd>
+          <dt>授課教師</dt>
+          <dd>溫家瑋</dd>
+        </dl>
+
+        <div class="comment-caption">
+          <p>或是平替其他周三的課都可以~~</p>
+          <p>可以給你一顆炙熱的感恩的心</p>
+          <p></p>
+          <div class="comment-hashtag-container">
+            <span class="comment-hashtag">#炙熱的心</span>
+            <span class="comment-hashtag">#週三課</span>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="action-button">
+            <img
+              src="./img/Vector.svg"
+              width="20"
+              height="15"
+              alt="Like Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/comment.svg"
+              width="20"
+              height="15"
+              alt="Comment Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img src="./img/link.svg" width="25" height="15" alt="Link Icon" />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/share.svg"
+              width="25"
+              height="15"
+              alt="Share Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/collect.svg"
+              width="20"
+              height="15"
+              alt="Collect Icon"
+            />
+          </button>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="user-info">
+          <div class="user-avatar">
+            <img
+              src="./img/usericon.svg"
+              width="40"
+              height="40"
+              alt="User Icon"
+            />
+          </div>
+          <div class="info-container">
+            <div class="user-name">
+              <span>user01234</span>
+            </div>
+
+            <div class="status-tag-container">
+              <div class="status-tag">求課</div>
+              <p>一週前</p>
+            </div>
+          </div>
+        </div>
+        <h1>我想要的課程：</h1>
+        <br />
+        <dl class="course-details">
+          <dt>科目</dt>
+          <dd>網站設計與數位剪輯</dd>
+          <dt>課程類別</dt>
+          <dd>專選修</dd>
+          <dt>課程代碼</dt>
+          <dd>VCD213</dd>
+          <dt>上課時間</dt>
+          <dd>(一)6-8</dd>
+          <dt>授課教師</dt>
+          <dd>林昱萱</dd>
+        </dl>
+
+        <div class="comment-caption">
+          <p>
+            喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵
+          </p>
+          <p>(我只是想測試長度)</p>
+          <p>翻譯蒟蒻</p>
+          <div class="comment-hashtag-container">
+            <span class="comment-hashtag">#cow8</span>
+            <span class="comment-hashtag">#星8克</span>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="action-button">
+            <img
+              src="./img/Vector.svg"
+              width="20"
+              height="15"
+              alt="Like Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/comment.svg"
+              width="20"
+              height="15"
+              alt="Comment Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img src="./img/link.svg" width="25" height="15" alt="Link Icon" />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/share.svg"
+              width="25"
+              height="15"
+              alt="Share Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/collect.svg"
+              width="20"
+              height="15"
+              alt="Collect Icon"
+            />
+          </button>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="user-info">
+          <div class="user-avatar">
+            <img
+              src="./img/usericon.svg"
+              width="40"
+              height="40"
+              alt="User Icon"
+            />
+          </div>
+          <div class="info-container">
+            <div class="user-name">
+              <span>user01234</span>
+            </div>
+
+            <div class="status-tag-container">
+              <div class="status-tag">求課</div>
+              <p>5小時</p>
+            </div>
+          </div>
+        </div>
+        <h1>我想要的課程：</h1>
+        <br />
+        <dl class="course-details">
+          <dt>科目</dt>
+          <dd>網站設計與數位剪輯</dd>
+          <dt>課程類別</dt>
+          <dd>專選修</dd>
+          <dt>課程代碼</dt>
+          <dd>VCD213</dd>
+          <dt>上課時間</dt>
+          <dd>(一)6-8</dd>
+          <dt>授課教師</dt>
+          <dd>林昱萱</dd>
+        </dl>
+
+        <div class="comment-caption">
+          <p>臺藝好課選對你的命中課</p>
+          <p>(我只是想測試長度)</p>
+          <p>翻譯蒟蒻</p>
+          <div class="comment-hashtag-container">
+            <span class="comment-hashtag">#好課</span>
+            <span class="comment-hashtag">#讚</span>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="action-button">
+            <img
+              src="./img/Vector.svg"
+              width="20"
+              height="15"
+              alt="Like Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/comment.svg"
+              width="20"
+              height="15"
+              alt="Comment Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img src="./img/link.svg" width="25" height="15" alt="Link Icon" />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/share.svg"
+              width="25"
+              height="15"
+              alt="Share Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/collect.svg"
+              width="20"
+              height="15"
+              alt="Collect Icon"
+            />
+          </button>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="user-info">
+          <div class="user-avatar">
+            <img
+              src="./img/usericon.svg"
+              width="40"
+              height="40"
+              alt="User Icon"
+            />
+          </div>
+          <div class="info-container">
+            <div class="user-name">
+              <span>user01234</span>
+            </div>
+
+            <div class="status-tag-container">
+              <div class="status-tag">求課</div>
+              <p>11小時</p>
+            </div>
+          </div>
+        </div>
+        <h1>我想要的課程：</h1>
+        <br />
+        <dl class="course-details">
+          <dt>科目</dt>
+          <dd>網站設計與數位剪輯</dd>
+          <dt>課程類別</dt>
+          <dd>專選修</dd>
+          <dt>課程代碼</dt>
+          <dd>VCD213</dd>
+          <dt>上課時間</dt>
+          <dd>(一)6-8</dd>
+          <dt>授課教師</dt>
+          <dd>林昱萱</dd>
+        </dl>
+
+        <div class="comment-caption">
+          <p>臺藝好課選對你的命中課</p>
+          <p>(我只是想測試長度)</p>
+          <p>翻譯蒟蒻</p>
+          <div class="comment-hashtag-container">
+            <span class="comment-hashtag">#好課</span>
+            <span class="comment-hashtag">#讚</span>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="action-button">
+            <img
+              src="./img/Vector.svg"
+              width="20"
+              height="15"
+              alt="Like Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/comment.svg"
+              width="20"
+              height="15"
+              alt="Comment Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img src="./img/link.svg" width="25" height="15" alt="Link Icon" />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/share.svg"
+              width="25"
+              height="15"
+              alt="Share Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/collect.svg"
+              width="20"
+              height="15"
+              alt="Collect Icon"
+            />
+          </button>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="user-info">
+          <div class="user-avatar">
+            <img
+              src="./img/usericon.svg"
+              width="40"
+              height="40"
+              alt="User Icon"
+            />
+          </div>
+          <div class="info-container">
+            <div class="user-name">
+              <span>user01234</span>
+            </div>
+
+            <div class="status-tag-container">
+              <div class="status-tag">求課</div>
+              <p>3天前</p>
+            </div>
+          </div>
+        </div>
+        <h1>我想要的課程：</h1>
+        <br />
+        <dl class="course-details">
+          <dt>科目</dt>
+          <dd>網站設計與數位剪輯</dd>
+          <dt>課程類別</dt>
+          <dd>專選修</dd>
+          <dt>課程代碼</dt>
+          <dd>VCD213</dd>
+          <dt>上課時間</dt>
+          <dd>(一)6-8</dd>
+          <dt>授課教師</dt>
+          <dd>林昱萱</dd>
+        </dl>
+
+        <div class="comment-caption">
+          <p>臺藝好課選對你的命中課</p>
+          <p>(我只是想測試長度)</p>
+          <p>翻譯蒟蒻</p>
+          <div class="comment-hashtag-container">
+            <span class="comment-hashtag">#好課</span>
+            <span class="comment-hashtag">#讚</span>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="action-button">
+            <img
+              src="./img/Vector.svg"
+              width="20"
+              height="15"
+              alt="Like Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/comment.svg"
+              width="20"
+              height="15"
+              alt="Comment Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img src="./img/link.svg" width="25" height="15" alt="Link Icon" />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/share.svg"
+              width="25"
+              height="15"
+              alt="Share Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/collect.svg"
+              width="20"
+              height="15"
+              alt="Collect Icon"
+            />
+          </button>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="user-info">
+          <div class="user-avatar">
+            <img
+              src="./img/usericon.svg"
+              width="40"
+              height="40"
+              alt="User Icon"
+            />
+          </div>
+          <div class="info-container">
+            <div class="user-name">
+              <span>user01234</span>
+            </div>
+
+            <div class="status-tag-container">
+              <div class="status-tag">求課</div>
+              <p>5天前</p>
+            </div>
+          </div>
+        </div>
+        <h1>我想要的課程：</h1>
+        <br />
+        <dl class="course-details">
+          <dt>科目</dt>
+          <dd>網站設計與數位剪輯</dd>
+          <dt>課程類別</dt>
+          <dd>專選修</dd>
+          <dt>課程代碼</dt>
+          <dd>VCD213</dd>
+          <dt>上課時間</dt>
+          <dd>(一)6-8</dd>
+          <dt>授課教師</dt>
+          <dd>林昱萱</dd>
+        </dl>
+
+        <div class="comment-caption">
+          <p>臺藝好課選對你的命中課</p>
+          <p>(我只是想測試長度)</p>
+          <p>翻譯蒟蒻</p>
+          <div class="comment-hashtag-container">
+            <span class="comment-hashtag">#好課</span>
+            <span class="comment-hashtag">#讚</span>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="action-button">
+            <img
+              src="./img/Vector.svg"
+              width="20"
+              height="15"
+              alt="Like Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/comment.svg"
+              width="20"
+              height="15"
+              alt="Comment Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img src="./img/link.svg" width="25" height="15" alt="Link Icon" />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/share.svg"
+              width="25"
+              height="15"
+              alt="Share Icon"
+            />
+          </button>
+          <button class="action-button">
+            <img
+              src="./img/collect.svg"
+              width="20"
+              height="15"
+              alt="Collect Icon"
+            />
+          </button>
+        </div>
+      </div>
+      <!-- 更多課程卡片 -->
+    </div>
+
+    <footer>
+      <p>&copy; 220307新北市板橋區大觀路一段59號&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;電話：02-2272-2181&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;學校網址：https://www.ntua.edu.tw/</p>
+    </footer>
+
+    
+  </body>
+</html>

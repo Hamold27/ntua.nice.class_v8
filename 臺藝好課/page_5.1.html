@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>臺藝好課-5.1個人頁</title>
+
+    <link rel="stylesheet" href="./js/5.1.js" />
+
+    <link rel="icon" href="./img/nav_pic.png"> 
+
+
+<style>
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom, #000000, #fc5a40);
+  color: #fff;
+  min-height: 100vh;
+}
+
+/*下面是 header    */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky; /* 或用 position: fixed; */
+  top: 0; /* 将导航栏固定到页面顶部 */
+  z-index: 1000; /* 确保导航栏始终在前面 */
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 60px;
+  }
+  
+  .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  }
+  
+  .navbar-logo {
+    margin-left: 205px;
+  }
+
+  .navbar-logo img {
+    width: 50%;
+    height: 50%;
+  }
+
+  .nav-container {
+  display: flex;
+  align-items: flex-start;
+  margin-right: 205px;
+  height: 80px;
+  }
+  
+  .main-nav {
+  display: inline-flex;
+  gap: 1.5rem;
+  margin-right: 2rem;
+  height: 60px;
+  }
+  
+  .nav-item {
+  position: relative;
+  }
+  
+  .nav-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s;
+  }
+  
+  .nav-link:hover {
+  color: var(--text-color);
+  }
+  
+  .dropdown {
+  top: 30px;
+  left: 0;
+  background-color: #000000;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  }
+  
+  .nav-item:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  }
+  
+  .dropdown-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: rgba(166, 166, 166, 0.7);
+  text-decoration: none;
+  transition: background-color 0.3s;
+  }
+  
+  .dropdown-item:hover {
+  background-color: #242424;
+  color: #ffffff;
+  }
+  
+  .search-container {
+  position: relative;
+  width: 16rem;
+  }
+  
+  .search-input {
+  width: 100%;
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  }
+  
+  .search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.5);
+  }
+  
+
+
+/*
+.header {
+  background-color: rgba(24, 24, 27, 0.9);
+  border-bottom: 1px solid rgb(39, 39, 42);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: bold;
+  color: rgba(252, 90, 64, 1);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-links a {
+  color: rgb(161, 161, 170);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: #fff;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #1f1f1f;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: #898989;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #2f2f2f;
+  color: #ffffff;
+}
+
+.nav-item:hover .dropdown-content {
+  display: block;
+}
+
+
+*/
+
+.main-container {
+  max-width: 1200px;
+  margin: 5rem auto 0;
+  padding: 1rem;
+  display: flex;
+  gap: 2rem;
+}
+
+
+.sidebar {
+  width: 280px;
+  flex-shrink: 0;
+}
+
+.profile-card {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0)
+  );
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  color: #fff;
+  height: 800px;
+}
+
+.profile-image {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  display: block;
+}
+
+.profile-name {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.profile-subtitle {
+  text-align: center;
+  color: rgb(255, 255, 255);
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-nav button {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  background: none;
+  border: none;
+  color: rgb(255, 255, 255);
+  text-align: left;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  transition: background 0.5s, color 0.5s; /* 添加平滑過渡效果 */
+}
+
+.sidebar-nav button:hover {
+  background: linear-gradient(
+    45deg,
+    rgba(252, 90, 64, 1),
+    rgba(255, 255, 255, 0)
+  ); /* 漸層顏色 */
+  color: white;
+}
+
+.sidebar-nav button.active {
+  background: linear-gradient(
+    45deg,
+    rgba(252, 90, 64, 1),
+    rgba(255, 255, 255, 0)
+  ); /* 漸層顏色 */
+  color: white;
+}
+
+.content {
+  flex: 1;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.small-dropdown {
+  position: relative;
+  font-size: 0.9rem;
+}
+
+.small-dropdown-button {
+  padding: 0.5rem 1rem;
+  background-color: rgb(39, 39, 42);
+  border: 1px solid rgb(63, 63, 70);
+  color: white;
+  border-radius: 70px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 200px;
+}
+
+.small-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #1f1f1f;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.small-dropdown-content a {
+  color: #7b7b7b;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.small-dropdown-content a:hover {
+  background-color: #2f2f2f;
+}
+
+.small-dropdown.active .small-dropdown-content {
+  display: block;
+}
+
+.small-dropdown:hover .small-dropdown-content {
+
+display: block;
+
+
+}
+
+.posts {
+  column-count: 2; /* 設置列數 */
+  column-gap: 1rem; /* 設置列之間的間距 */
+}
+
+.post-card {
+  background-color: white;
+  color: #09090b;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem; /* 卡片間距 */
+  display: inline-block; /* 確保卡片不被拆分 */
+  width: 100%; /* 卡片寬度適應列寬 */
+}
+
+.post-header {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.post-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.post-meta {
+  flex: 1;
+}
+
+.post-author {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  display: inline-block;
+}
+
+.post-time {
+  color: #666;
+  font-size: 0.875rem;
+  display: inline-block;
+  padding: 10px;
+}
+
+.post-title {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.post-tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tag {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+}
+
+.post-content {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.post-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.action-button {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 1.25rem;
+}
+
+.action-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.rating {
+  color: #fbbf24;
+  margin-bottom: 0.5rem;
+}
+.comment123 {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: medium;
+  margin-bottom: 15px;
+}
+
+
+footer {
+  background-color: black;  /* 黑色底色 */
+  color: white;             /* 白色文字 */
+  text-align: center;       /* 文字置中 */
+  padding: 5px 0;          /* 上下內邊距 */        /* 固定在頁面底部 */
+  bottom: 0;
+  width: 100%;              /* 佔滿整個頁面寬度 */
+  height: 70px;
+}
+
+footer p {
+  margin: 16px 0px;
+}
+
+
+</style>
+
+  </head>
+  <body>
+
+    <header class="header">
+      <div class="navbar-logo">
+        <a href="index.html">
+      <img src="./img/nav_pic.png">
+    </a>
+      </div>
+      <div class="nav-container">
+        <nav class="main-nav">
+          <div class="nav-item">
+            <a href="page_6.0.html" class="nav-link">選課須知</a>
+          </div>
+
+          <div class="nav-item">
+            <a href="page_3.0.html" class="nav-link">院系/通識課程</a>
+            <div class="dropdown">
+              <a href="page_3.0.html" class="dropdown-item">設計學院</a>
+              <a href="page_3.0.html" class="dropdown-item">美術學院</a>
+              <a href="page_3.0.html" class="dropdown-item">傳播學院</a>
+              <a href="page_3.0.html" class="dropdown-item">表演學院</a>
+              <a href="page_3.0.html" class="dropdown-item">人文學院</a>
+              <a href="page_3.0.html" class="dropdown-item">體育學院</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="./page_3.2.html" class="nav-link">&nbsp;&nbsp;&nbsp;&nbsp;課程討論</a>
+            <div class="dropdown">
+              <a href="./page_1.1.html" class="dropdown-item">討論區</a>
+              <a href="page_2.0.html" class="dropdown-item">最高評價</a>
+              <a href="page_1.0.html" class="dropdown-item">熱門討論</a>
+            </div>
+          </div>
+          <div class="nav-item">
+              <a href="./page_4.0.html" class="nav-link">換課區</a>
+              <div class="dropdown">
+                <a href="./page_4.0.html" class="dropdown-item">許願</a>
+                <a href="./page_4.1.html" class="dropdown-item">交換</a>
+              </div>
+            </div>
+          <a href="page_5.0.html" class="nav-link">登入</a>
+        </nav>
+
+      </div>
+    </header>
+
+
+    <div class="main-container">
+      <aside class="sidebar">
+        <div class="profile-card">
+          <img
+            src="./img/個人照.svg"
+            alt="倒大楣的頭像"
+            class="profile-image"
+          />
+          <h2 class="profile-name">倒大楣</h2>
+          <p class="profile-subtitle">全部當光光</p>
+          <nav class="sidebar-nav">
+            <button>個人資料管理</button>
+            <button>通知設定</button>
+            <button class="active">留言紀錄</button>
+            <button>通知設定</button>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="content">
+
+        <div class="filters">
+
+          <div class="small-dropdown">
+            <button class="small-dropdown-button" id="content-filter">
+              全部內容 <img src="./img/indexxvector.svg" width="15" />
+            </button>
+            <div class="small-dropdown-content">
+              <a href="#" data-value="全部內容">全部內容</a>
+              <a href="#" data-value="課程評價">課程評價</a>
+              <a href="#" data-value="課程討論">課程討論</a>
+            </div>
+          </div>
+          <div class="small-dropdown">
+            <button class="small-dropdown-button" id="date-filter">
+              發布日期由新到舊<img src="./img/indexxvector.svg" width="15" />
+            </button>
+            <div class="small-dropdown-content">
+              <a href="#" data-value="發布日期由新到舊">發布日期由新到舊</a>
+              <a href="#" data-value="發布日期由舊到新">發布日期由舊到新</a>
+            </div>
+          </div>
+          <div class="small-dropdown">
+            <button class="small-dropdown-button" id="comment-filter">
+              評論條件<img src="./img/indexxvector.svg" width="15" />
+            </button>
+            <div class="small-dropdown-content">
+              <a href="#" data-value="全部評論">全部評論</a>
+              <a href="#" data-value="高評分">高評分</a>
+              <a href="#" data-value="低評分">低評分</a>
+            </div>
+          </div>
+        </div>
+        <div class="comment123"><p>共六則內容</p></div>
+        <div class="posts">
+          <article class="post-card">
+            <div class="post-header">
+              <img src="./img/個人照.svg" alt="用戶頭像" class="post-avatar" />
+              <div class="post-meta">
+                <div class="post-author">倒大楣</div>
+                <span class="post-time">15小時前發佈</span>
+              </div>
+            </div>
+            <div class="rating">★★★★★</div>
+            <h3 class="post-title">網站設計與數位剪輯</h3>
+            <div class="post-tags">
+              <span class="tag">實用</span>
+              <span class="tag">教學品質佳</span>
+            </div>
+            <p class="post-content">
+              回家一定要複習<br />
+              不然每次上課就是 A WHOLE NEW WORLD
+            </p>
+            <div class="post-actions">
+              <button class="action-button" title="Like">
+                <i class="fas fa-heart"></i>
+              </button>
+              <button class="action-button" title="Comment">
+                <i class="fas fa-comment"></i>
+              </button>
+              <button class="action-button" title="Copy Link">
+                <i class="fas fa-link"></i>
+              </button>
+              <button class="action-button" title="Share">
+                <i class="fas fa-share"></i>
+              </button>
+              <button class="action-button" title="Bookmark">
+                <i class="fas fa-bookmark"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="post-card">
+            <div class="post-header">
+              <img src="./img/個人照.svg" alt="用戶頭像" class="post-avatar" />
+              <div class="post-meta">
+                <div class="post-author">倒大楣</div>
+                <div class="post-time">1天前發佈</div>
+              </div>
+            </div>
+            <div class="rating">★★★★★</div>
+            <h3 class="post-title">造形理論</h3>
+            <div class="post-tags">
+              <span class="tag">理論</span>
+              <span class="tag">教學品質佳</span>
+            </div>
+            <p class="post-content">
+              造形的形不能打成型，形與型傻傻分不清，老師抓錯字比我還厲害。
+            </p>
+            <div class="post-actions">
+              <button class="action-button" title="Like">
+                <i class="fas fa-heart"></i>
+              </button>
+              <button class="action-button" title="Comment">
+                <i class="fas fa-comment"></i>
+              </button>
+              <button class="action-button" title="Copy Link">
+                <i class="fas fa-link"></i>
+              </button>
+              <button class="action-button" title="Share">
+                <i class="fas fa-share"></i>
+              </button>
+              <button class="action-button" title="Bookmark">
+                <i class="fas fa-bookmark"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="post-card">
+            <div class="post-header">
+              <img src="./img/個人照.svg" alt="用戶頭像" class="post-avatar" />
+              <div class="post-meta">
+                <div class="post-author">倒大楣</div>
+                <div class="post-time">2天前發佈</div>
+              </div>
+            </div>
+            <div class="rating">★★★★★</div>
+            <h3 class="post-title">網站設計與數位策略</h3>
+            <div class="post-tags">
+              <span class="tag">實用</span>
+              <span class="tag">教學品質佳</span>
+            </div>
+            <p class="post-content">重修舊好喔~~</p>
+            <div><img src="./img/重修.svg" /></div>
+            <div class="post-actions">
+              <button class="action-button" title="Like">
+                <i class="fas fa-heart"></i>
+              </button>
+              <button class="action-button" title="Comment">
+                <i class="fas fa-comment"></i>
+              </button>
+              <button class="action-button" title="Copy Link">
+                <i class="fas fa-link"></i>
+              </button>
+              <button class="action-button" title="Share">
+                <i class="fas fa-share"></i>
+              </button>
+              <button class="action-button" title="Bookmark">
+                <i class="fas fa-bookmark"></i>
+              </button>
+            </div>
+          </article>
+          <article class="post-card">
+            <div class="post-header">
+              <img src="./img/個人照.svg" alt="用戶頭像" class="post-avatar" />
+              <div class="post-meta">
+                <div class="post-author">倒大楣</div>
+                <div class="post-time">20小時前發佈</div>
+              </div>
+            </div>
+            <div class="rating">★★★★☆</div>
+            <h3 class="post-title">國際關係理論</h3>
+            <div class="post-tags">
+              <span class="tag">普普</span>
+              <span class="tag">報告為主</span>
+            </div>
+            <p class="post-content">
+              葛爸人很好，
+              學期以一個報告為主，跟平時出席與課程留言為主，分給得還不錯!
+            </p>
+            <div><img src="./img/brain.jpg" /></div>
+            <div class="post-actions">
+              <button class="action-button" title="Like">
+                <i class="fas fa-heart"></i>
+              </button>
+              <button class="action-button" title="Comment">
+                <i class="fas fa-comment"></i>
+              </button>
+              <button class="action-button" title="Copy Link">
+                <i class="fas fa-link"></i>
+              </button>
+              <button class="action-button" title="Share">
+                <i class="fas fa-share"></i>
+              </button>
+              <button class="action-button" title="Bookmark">
+                <i class="fas fa-bookmark"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="post-card">
+            <div class="post-header">
+              <img src="./img/個人照.svg" alt="用戶頭像" class="post-avatar" />
+              <div class="post-meta">
+                <div class="post-author">倒大楣</div>
+                <div class="post-time">2天前發佈</div>
+              </div>
+            </div>
+            <div class="rating">★★★★☆</div>
+            <h3 class="post-title">企業識別設計</h3>
+            <div class="post-tags">
+              <span class="tag">實作</span>
+              <span class="tag">周周有進度</span>
+            </div>
+            <p class="post-content">極度接近崩潰，改完發現第一版最好QQ</p>
+            <div class="post-actions">
+              <button class="action-button" title="Like">
+                <i class="fas fa-heart"></i>
+              </button>
+              <button class="action-button" title="Comment">
+                <i class="fas fa-comment"></i>
+              </button>
+              <button class="action-button" title="Copy Link">
+                <i class="fas fa-link"></i>
+              </button>
+              <button class="action-button" title="Share">
+                <i class="fas fa-share"></i>
+              </button>
+              <button class="action-button" title="Bookmark">
+                <i class="fas fa-bookmark"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="post-card">
+            <div class="post-header">
+              <img src="./img/個人照.svg" alt="用戶頭像" class="post-avatar" />
+              <div class="post-meta">
+                <div class="post-author">倒大楣</div>
+                <div class="post-time">1週前發佈</div>
+              </div>
+            </div>
+            <div class="rating">★★★★★</div>
+            <h3 class="post-title">基本攝影</h3>
+            <div class="post-tags">
+              <span class="tag">理論</span>
+              <span class="tag">教學品質佳</span>
+            </div>
+            <p class="post-content">
+              老師人很好也很用心， 都會特別開放討論時間給同學， 課堂所學物超所值
+            </p>
+            <div class="post-actions">
+              <button class="action-button" title="Like">
+                <i class="fas fa-heart"></i>
+              </button>
+              <button class="action-button" title="Comment">
+                <i class="fas fa-comment"></i>
+              </button>
+              <button class="action-button" title="Copy Link">
+                <i class="fas fa-link"></i>
+              </button>
+              <button class="action-button" title="Share">
+                <i class="fas fa-share"></i>
+              </button>
+              <button class="action-button" title="Bookmark">
+                <i class="fas fa-bookmark"></i>
+              </button>
+            </div>
+          </article>
+        </div>
+      </main>
+    </div>
+
+    <footer>
+      <p>&copy; 220307新北市板橋區大觀路一段59號&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;電話：02-2272-2181&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;學校網址：https://www.ntua.edu.tw/</p>
+    </footer>
+
+
+    <script src="./js/5.1.js"></script>
+  </body>
+</html>

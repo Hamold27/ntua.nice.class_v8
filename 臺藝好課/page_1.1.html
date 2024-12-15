@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>臺藝好課_1.1討論區</title>
+    <link href="./css/bootstrap-5.3.3-dist/" rel="stylesheet" />
+    <link href="./css/discuss.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" href="./img/nav_pic.png"> 
+
+<style>
+  body {
+  background-color: black;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky; /* 或用 position: fixed; */
+  top: 0; /* 将导航栏固定到页面顶部 */
+  z-index: 1000; /* 确保导航栏始终在前面 */
+  background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  }
+  
+  .navbar-logo {
+    margin-left: 200px;
+  }
+
+  .navbar-logo img {
+    width: 50%;
+    height: 50%;
+  }
+
+  .nav-container {
+  display: flex;
+  align-items: center;
+  margin-right: 205px;
+  }
+  
+  .main-nav {
+  display: flex;
+  gap: 1.5rem;
+  margin-right: 2rem;
+  }
+  
+  .nav-item {
+  position: relative;
+  }
+  
+  .nav-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s;
+  }
+  
+  .nav-link:hover {
+  color: #9d9d9d
+  }
+  
+  .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 200px;
+  background-color: #000000;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 1);
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  }
+  
+  .nav-item:hover .dropdown {
+  opacity: 90;
+  color: #9d9d9d;
+  visibility: visible;
+  }
+  
+  .dropdown-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: rgba(166, 166, 166, 0.7);
+  text-decoration: none;
+  transition: background-color 0.3s;
+  }
+  
+  .dropdown-item:hover {
+  background-color: #242424;
+  color: #ffffff;
+  }
+  
+  .search-container {
+  position: relative;
+  width: 16rem;
+  }
+  
+  .search-input {
+  width: 100%;
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  }
+  
+  .search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.5);
+  }
+  
+
+  /*nav */
+
+.discuss_bread-item img {
+  width: 25px;
+  height: 25px;
+  margin-right: 15px;
+}
+.discuss_bread {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 53px;
+  margin-top: 82px;
+  margin-left: 205px;
+}
+
+.discuss_bread-item {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #ffffff;
+  margin-right: 15px;
+}
+
+.discuss_bread-separator {
+  margin-right: 15px;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.discuss_bread a:last-child,
+.discuss_bread-separator:last-child {
+  margin-right: 0;
+}
+.discuss_bread-separator {
+  font-size: 20px;
+  line-height: 1;
+  color: #ffffff;
+}
+.Comment_form {
+  background: linear-gradient(rgba(230, 222, 222, 0.5), rgba(0, 0, 0, 0.5));
+  color: #ffffff;
+  width: 1320px;
+  height: 219px;
+  border: 1px solid #ffffff;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.Comment_form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.line1,
+.line2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 46px;
+}
+.Comment_form p {
+  opacity: 0.6;
+  font-size: 24px;
+}
+.line2 {
+  margin-top: 10px;
+}
+.line2 img {
+  position: absolute;
+  bottom: 21px;
+}
+.Comment_form button {
+  background-color: #fc5a40;
+  color: #ffffff;
+  font-size: 24px;
+  border-radius: 15px;
+  border: none;
+  width: 154px;
+  height: 48px;
+  position: absolute;
+  bottom: 27px;
+  right: 33px;
+}
+.discuss_guess {
+  background: linear-gradient(rgba(118, 114, 114, 0.5), rgba(0, 0, 0, 0.5));
+  color: #ffffff;
+  width: 651px;
+  height: 130px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  margin-top: 43px;
+  position: relative;
+  overflow: hidden;
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.discuss_guess p {
+  position: absolute;
+  z-index: 2;
+  color: #3d3d3d;
+}
+
+.discuss_guess .text-1 {
+  font-size: 14px;
+  top: 15px;
+  left: 20px;
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+.discuss_guess .text-2 {
+  font-size: 32px;
+  top: 20px;
+  left: 20px;
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: 600;
+  bottom: 40px;
+}
+
+.discuss_guess img {
+  position: absolute;
+  z-index: 1;
+  bottom: 19px;
+  right: 32px;
+}
+.discuss-container {
+  display: flex;
+  gap: 19px;
+}
+.button-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  width: 92px;
+  height: 51px;
+  gap: 30px;
+}
+
+.button-red {
+  background-color: #fc5a40;
+  color: #ffffff;
+  font-size: 24px;
+  border-radius: 70px;
+  width: 92px;
+  height: 51px;
+  border: none;
+  gap: 30px;
+}
+.button-black {
+  background-color: #3d3d3d;
+  color: #ffffff;
+  font-size: 24px;
+  border-radius: 70px;
+  width: 92px;
+  height: 51px;
+  border: none;
+  gap: 30px;
+}
+.button-container {
+  margin-top: 68px;
+}
+
+.option {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.option-style {
+  font-size: 14px;
+  background-color: #f5f5f5;
+  color: #333;
+}
+.last-button {
+  margin-right: 452px;
+}
+.option-style {
+  padding: 10px;
+  border-radius: 70px;
+  border: 1px solid #ccc;
+  background-color: #000000;
+  color: #fff;
+  font-size: 20px;
+  font-family: "Noto Sans TC", sans-serif;
+  height: 55px;
+}
+
+.option-style option {
+  padding: 8px 12px;
+  background-color: #ffffff;
+  color: #333;
+  font-size: 14px;
+}
+
+.option-1 {
+  width: 293px;
+}
+
+.option-2 {
+  width: 223px;
+}
+.button-container {
+  margin-bottom: 29px;
+}
+.comment_container {
+  background-color: #d9d9d9;
+  width: 650px;
+  height: 330px;
+  border-radius: 15px;
+  position: relative;
+  font-family: "Noto Sans TC", sans-serif;
+  color: #000;
+  line-height: 1.5;
+  padding-left: 31px;
+  padding-top: 31px;
+  padding: 31px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-name {
+  font-size: 20px;
+  color: #000;
+}
+
+.time {
+  font-size: 20px;
+  font-family: "Noto Sans TC", sans-serif;
+  color: #3d3d3d;
+}
+
+.remind {
+  font-size: 24px;
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.comment {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.comment_container img:last-child {
+  position: absolute;
+  bottom: 30px;
+  left: 31px;
+  right: 0;
+  margin-top: 85px;
+}
+.comment-container-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+  bottom: 0;
+  width: 100%;
+}
+.page_mid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-top: 20px;
+}
+
+</style>
+
+
+  </head>
+  <body>
+    <header class="header">
+      <div class="navbar-logo">
+        <a href="index.html">
+      <img src="./img/nav_pic.png">
+    </a>
+      </div>
+      <div class="nav-container">
+        <nav class="main-nav">
+          <div class="nav-item">
+            <a href="page_6.0.html" class="nav-link">選課須知</a>
+          </div>
+
+          <div class="nav-item">
+            <a href="page_3.0.html" class="nav-link">院系/通識課程</a>
+            <div class="dropdown">
+              <a href="page_3.0.html" class="dropdown-item">設計學院</a>
+              <a href="page_3.0.html" class="dropdown-item">美術學院</a>
+              <a href="page_3.0.html" class="dropdown-item">傳播學院</a>
+              <a href="page_3.0.html" class="dropdown-item">表演學院</a>
+              <a href="page_3.0.html" class="dropdown-item">人文學院</a>
+              <a href="page_3.0.html" class="dropdown-item">體育學院</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="./page_3.2.html" class="nav-link">課程討論</a>
+            <div class="dropdown">
+              <a href="./page_1.1.html" class="dropdown-item">討論區</a>
+              <a href="page_2.0.html" class="dropdown-item">最高評價</a>
+              <a href="page_1.0.html" class="dropdown-item">熱門討論</a>
+            </div>
+          </div>
+          <div class="nav-item">
+              <a href="./page_4.0.html" class="nav-link">換課區</a>
+              <div class="dropdown">
+                <a href="./page_4.0.html" class="dropdown-item">許願</a>
+                <a href="./page_4.1.html" class="dropdown-item">交換</a>
+              </div>
+            </div>
+          <a href="page_5.0.html" class="nav-link">登入</a>
+        </nav>
+
+      </div>
+    </header>
+
+    <div class="discuss_bread">
+      <a href="#" class="discuss_bread-item">
+        <img src="./img/discuss_home.png" alt="Home Icon" />
+        <span>首頁</span>
+      </a>
+      <span class="discuss_bread-separator">&gt;</span>
+      <a href="#" class="discuss_bread-item">
+        <span>課程討論</span>
+      </a>
+    </div>
+    <div class="page_mid">
+      <div class="Comment_form">
+        <div class="line1">
+          <img src="./img/discuss_pen.png" alt="Pen Icon" />
+          <p>有什麽新鮮事？！...</p>
+        </div>
+        <div class="line2">
+          <img src="./img/discuss_group.png" alt="Group Icon" />
+          <button>發佈</button>
+        </div>
+      </div>
+      <div class="discuss-container">
+        <div class="discuss_guess">
+          <button onclick="location.href='page_1.0.html';" >
+          <p class="text-1">猜你想知道</p>
+          <p class="text-2">熱門課程討論</p>
+          <img src="./img/discuss_arrow.png" />
+          <img
+            src="./img/guess_bg.png"
+            alt="Background Image"
+            class="background-image"
+          />
+        </button>
+        </div>
+        <div class="discuss_guess">
+          <button onclick="location.href='page_2.0.html';" >
+          <p class="text-1">猜你想知道</p>
+          <p class="text-2">最高評分課程</p>
+          <img src="./img/discuss_arrow.png" />
+          <img
+            src="./img/guess_bg.png"
+            alt="Background Image"
+            class="background-image"
+          />
+        </button>
+        </div>
+      </div>
+      <div class="button-container">
+        <button class="button-red">總覽</button>
+        <button class="button-black">理論</button>
+        <button class="button-black last-button">實作</button>
+        <select class="option-style option-1">
+          <option value="option1">課程種類</option>
+        </select>
+        <select class="option-style option-2">
+          <option value="option2">時間排序</option>
+        </select>
+      </div>
+      <div class="comment-container-wrapper">
+        <div class="comment_container">
+          <div class="head">
+            <img src="./img/discuss_people.png" />
+            <p class="user-name">逝傳仔</p>
+            <p class="time">1天前</p>
+          </div>
+          <p class="remind">每週貼心提醒退選</p>
+          <p class="comment">
+            老師人很好，會需要寫程式，但需要時間消化，消化不良容易被當掉QQ要有心理準備
+          </p>
+          <img src="./img/discuss_group_buttom.png" />
+        </div>
+        <div class="comment_container">
+          <div class="head">
+            <img src="./img/discuss_people.png" />
+            <p class="user-name">逝傳仔</p>
+            <p class="time">1天前</p>
+          </div>
+          <p class="remind">每週貼心提醒退選</p>
+          <p class="comment">
+            老師人很好，會需要寫程式，但需要時間消化，消化不良容易被當掉QQ要有心理準備
+          </p>
+          <img src="./img/discuss_group_buttom.png" />
+        </div>
+        <div class="comment_container">
+          <div class="head">
+            <img src="./img/discuss_people.png" />
+            <p class="user-name">逝傳仔</p>
+            <p class="time">1天前</p>
+          </div>
+          <p class="remind">每週貼心提醒退選</p>
+          <p class="comment">
+            老師人很好，會需要寫程式，但需要時間消化，消化不良容易被當掉QQ要有心理準備
+          </p>
+          <img src="./img/discuss_group_buttom.png" />
+        </div>
+        <div class="comment_container">
+          <div class="head">
+            <img src="./img/discuss_people.png" />
+            <p class="user-name">逝傳仔</p>
+            <p class="time">1天前</p>
+          </div>
+          <p class="remind">每週貼心提醒退選</p>
+          <p class="comment">
+            老師人很好，會需要寫程式，但需要時間消化，消化不良容易被當掉QQ要有心理準備
+          </p>
+          <img src="./img/discuss_group_buttom.png" />
+        </div>
+        <div class="comment_container">
+          <div class="head">
+            <img src="./img/discuss_people.png" />
+            <p class="user-name">逝傳仔</p>
+            <p class="time">1天前</p>
+          </div>
+          <p class="remind">每週貼心提醒退選</p>
+          <p class="comment">
+            老師人很好，會需要寫程式，但需要時間消化，消化不良容易被當掉QQ要有心理準備
+          </p>
+          <img src="./img/discuss_group_buttom.png" />
+        </div>
+        <div class="comment_container">
+          <div class="head">
+            <img src="./img/discuss_people.png" />
+            <p class="user-name">逝傳仔</p>
+            <p class="time">1天前</p>
+          </div>
+          <p class="remind">每週貼心提醒退選</p>
+          <p class="comment">
+            老師人很好，會需要寫程式，但需要時間消化，消化不良容易被當掉QQ要有心理準備
+          </p>
+          <img src="./img/discuss_group_buttom.png" />
+        </div>
+      </div>
+    </div>
+    <!-- footer -->
+    <footer>
+      <p>
+        &copy;
+        220307新北市板橋區大觀路一段59號&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;電話：02-2272-2181&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;學校網址：https://www.ntua.edu.tw/
+      </p>
+    </footer>
+  </body>
+</html>

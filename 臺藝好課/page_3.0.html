@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>臺藝好課-3.0院系/通識課程</title>
+
+    <link rel="icon" href="./img/nav_pic.png"> 
+<style>
+    
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky; /* 或用 position: fixed; */
+  top: 0; /* 将导航栏固定到页面顶部 */
+  z-index: 1000; /* 确保导航栏始终在前面 */
+  background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  }
+  
+  .navbar-logo {
+    margin-left: 205px;
+  }
+
+  .navbar-logo img {
+    width: 50%;
+    height: 50%;
+  }
+
+  .nav-container {
+  display: flex;
+  align-items: center;
+  margin-right: 205px;
+  }
+  
+  .main-nav {
+  display: flex;
+  gap: 1.5rem;
+  margin-right: 2rem;
+  }
+  
+  .nav-item {
+  position: relative;
+  }
+  
+  .nav-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s;
+  }
+  
+  .nav-link:hover {
+  color: var(--text-color);
+  }
+  
+  .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 200px;
+  background-color: #000000;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  }
+  
+  .nav-item:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  }
+  
+  .dropdown-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: rgba(166, 166, 166, 0.7);
+  text-decoration: none;
+  transition: background-color 0.3s;
+  }
+  
+  .dropdown-item:hover {
+  background-color: #444;
+  color: #ffffff;
+  }
+  
+  .search-container {
+  position: relative;
+  width: 16rem;
+  }
+  
+  .search-input {
+  width: 100%;
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  }
+  
+  .search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.5);
+  }
+.main-content {
+    padding: 2rem;
+}
+
+.content-wrapper {
+    display: flex;
+    gap: 2rem;
+}
+
+.sidebar {
+    width: 200px;
+    flex-shrink: 0;
+}
+
+.sidebar-menu {
+    list-style: none;
+}
+
+.sidebar-menu li {
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sidebar-menu li.active {
+    background: linear-gradient(to right, #ff5f45, transparent);
+    border-radius: 30px 0px 0px 5px;
+}
+
+.main-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.featured-card {
+    background: linear-gradient(135deg, #ff5f45 0%, #2a2a2a 100%);
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 300px;
+}
+
+.featured-content {
+    max-width: 100%;
+}
+
+.featured-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.featured-description {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+}
+
+.featured-button {
+    background-color: #fff;
+    color: #000;
+    padding: 0.75rem 1.5rem;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+    align-self: flex-start;
+}
+
+.featured-button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.department-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.department-card {
+    background: linear-gradient(to top, rgb(0,0,0,0.5), rgba(135, 135, 135, 0.5));
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+.department-card:hover{
+    background: linear-gradient(to top, rgb(0,0,0,0.5), rgba(255, 81, 6, 0.5));
+}
+
+.department-header {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.department-title {
+    flex-grow: 1;
+}
+
+.department-title h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.department-title p {
+    color: #999;
+    font-size: 0.875rem;
+}
+
+.arrow-icon {
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.department-content {
+    background: #f5f5f5;
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+
+.year-list {
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.year-item {
+    background: #fff;
+    padding: 0.75rem 1rem;
+    border-radius: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #333;
+}
+
+.year-item span {
+    font-size: 0.9rem;
+}
+
+.music-card {
+    background: linear-gradient(135deg, #ff5f45 0%, #2a2a2a 100%);
+}
+
+.dance-card {
+    background: linear-gradient(135deg, #ff8f70 0%, #2a2a2a 100%);
+}
+
+.drama-card {
+    background: linear-gradient(135deg, #2a2a2a 0%, #2a2a2a 100%);
+}
+
+footer {
+  background-color: black;  /* 黑色底色 */
+  color: white;             /* 白色文字 */
+  text-align: center;       /* 文字置中 */
+  padding: 5px 0;          /* 上下內邊距 */        /* 固定在頁面底部 */
+  bottom: 0;
+  width: 100%;              /* 佔滿整個頁面寬度 */
+  height: 70px;
+}
+
+footer p {
+  margin: 16px 0px;
+}
+
+@media (max-width: 1024px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .department-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .featured-card {
+        text-align: center;
+    }
+
+    .featured-button {
+        align-self: center;
+    }
+}
+
+</style>
+
+
+</head>
+<body>
+    <div class="bg">
+        <a href="index.html">
+            <img src="./img/bg.png">
+          </a>
+        <style>
+            .bg {
+                position: fixed;
+                top: 0;
+                left: -50;
+                bottom: 20;
+                right: 0;
+                z-index: -999;
+            }
+            .bg img {
+                min-height: 100%;
+                width: 100%;
+            }
+        </style>
+    </div>
+    <header class="header">
+        <div class="navbar-logo">
+          <a href="index.html">
+        <img src="./img/nav_pic.png">
+      </a>
+        </div>
+        <div class="nav-container">
+          <nav class="main-nav">
+            <div class="nav-item">
+              <a href="page_6.0.html" class="nav-link">選課須知</a>
+            </div>
+  
+            <div class="nav-item">
+              <a href="page_3.0.html" class="nav-link">院系/通識課程</a>
+              <div class="dropdown">
+                <a href="page_3.0.html" class="dropdown-item">設計學院</a>
+                <a href="page_3.0.html" class="dropdown-item">美術學院</a>
+                <a href="page_3.0.html" class="dropdown-item">傳播學院</a>
+                <a href="page_3.0.html" class="dropdown-item">表演學院</a>
+                <a href="page_3.0.html" class="dropdown-item">人文學院</a>
+                <a href="page_3.0.html" class="dropdown-item">體育學院</a>
+              </div>
+            </div>
+            <div class="nav-item">
+              <a href="./page_3.2.html" class="nav-link">課程討論</a>
+              <div class="dropdown">
+                <a href="./page_1.1.html" class="dropdown-item">討論區</a>
+                <a href="page_2.0.html" class="dropdown-item">最高評價</a>
+                <a href="page_1.0.html" class="dropdown-item">熱門討論</a>
+              </div>
+            </div>
+            <div class="nav-item">
+                <a href="./page_4.0.html" class="nav-link">換課區</a>
+                <div class="dropdown">
+                  <a href="./page_4.0.html" class="dropdown-item">許願</a>
+                  <a href="./page_4.1.html" class="dropdown-item">交換</a>
+                </div>
+              </div>
+            <a href="page_5.0.html" class="nav-link">登入</a>
+          </nav>
+  
+        </div>
+      </header>
+
+    <main class="main-content">
+        <div class="content-wrapper">
+            <aside class="sidebar">
+                <ul class="sidebar-menu">
+                    <li class="active" data-id="performing-arts">美術學院</li>
+                    <li data-id="design">設計學院</li>
+                    <li data-id="fine-arts">表演藝術學院</li>
+                    <li data-id="communication">傳播學院</li>
+                    <li data-id="humanities">人文學院</li>
+                    <li data-id="physical-education">體育教學中心 </li>
+                </ul>
+            </aside>
+
+            <div class="main-area">
+                <div id="featured-card" class="featured-card">
+                    <!-- Dynamic featured card content will be inserted here -->
+                </div>
+
+                <div id="department-content" class="department-grid" onclick="location.href='page_3.1.html';" >
+                    <!-- Dynamic department content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 220307新北市板橋區大觀路一段59號&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;電話：02-2272-2181&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;學校網址：https://www.ntua.edu.tw/</p>
+      </footer>
+
+    <script>
+        const departmentContent = {
+            'performing-arts': {
+                featured: {
+                    title: '美術學院',
+                    description: '以美術理論探究為基礎；充分發展領域之基本特質',
+                    buttonText: '院選修'
+                },
+                departments: [
+                    {
+                        title: '美術學系',
+                        subtitle: 'The College of Performing Art',
+                        years: ['1 年級', '2 年級', '3 年級', '4 年級']
+                    },
+                    {
+                        title: '雕塑學系',
+                        subtitle: 'Department of Chinese Music',
+                        years: ['1 年級', '2 年級', '3 年級', '4 年級']
+                    },
+                    {
+                        title: '書畫藝術學系',
+                        subtitle: 'Department of Dance',
+                        years: ['1 年級', '2 年級', '3 年級', '4 年級']
+                    },
+                    {
+                        title: '古蹟藝術修護學系',
+                        subtitle: 'Department of Drama',
+                        years: ['1 年級', '2 年級', '3 年級', '4 年級']
+                    }
+                ]
+            },
+            'design': {
+                featured: {
+                    title: '設計學院',
+                    description: '學習如何運用創新設計思維來解決複雜問題，並將理論付諸實踐。本課程將激發你的創意潛能。',
+                    buttonText: '院選修'
+                },
+                departments: [
+                    {
+                        title: '視覺傳達設計學系',
+                        subtitle: 'The College of Design',
+                        years: ['1 年級', '2 年級', '3 年級', '4 年級']
+                    },
+                    {
+                        title: '工藝設計學系',
+                        subtitle: 'Department of Visual Communication Design',
+                        years: ['1 年級', '2 年級', '3 年級', '4 年級']
+                    },
+                    {
+                        title: '多媒體動畫藝術學系',
+                        subtitle: 'Department of Crafts and Design',
+                        years: ['1 年級', '2 年級', '3 年級', '4 年級']
+                    }
+                ]
+            },
+            'fine-arts': {
+                featured: {
+                    title: '表演藝術學院',
+                    description: '以表演藝術理論探究為基礎；充分發展戲劇、音樂、國樂、舞蹈各專業領域之基本特質',
+                    buttonText: '院選修'
+                },
+                departments: [
+                    {
+                        title: '戲劇學系',
+                        subtitle: 'The College of Fine Arts',
+                        years: ['1 年級', '2 年級', '3 年級', '4 年級']
+                    },
+                    {
+                        title: '音樂學系',
+                        subtitle: 'Department of Fine Arts',
+                        years: ['1 年級', '2 年級', '3 年級', '4 年級']
+                    },
+                    {
+                        title: '中國音樂學系',
+                        subtitle: 'Department of Calligraphy and Painting Arts',
+                        years: ['1 年級', '2 年級', '3 年級', '4 年級']
+                    },
+                    {
+                        title: '舞蹈學系',
+                        subtitle: 'Department of Fine Arts',
+                        years: ['1 年級', '2 年級', '3 年級', '4 年級']
+                    }
+                ]
+            },
+            'communication': {
+                featured: {
+                    title: '傳播學院',
+                    description: '探討數位媒體如何塑造現代社會，學習運用媒體工具產生積極的社會影響。本課程將為你開啟新的視野。',
+                    buttonText: '院選修'
+                },
+                departments: [
+                    {
+                        title: '傳播學院',
+                        subtitle: 'The College of Communication',
+                        years: ['1 年級', '2 年級', '3 年級', '4 年級']
+                    },
+                    {
+                        title: '圖文傳播藝術學系',
+                        subtitle: 'Department of Graphic Communication Arts',
+                        years: ['1 年級', '2 年級', '3 年級', '4 年級']
+                    },
+                    {
+                        title: '廣播電視學系',
+                        subtitle: 'Department of Radio and Television',
+                        years: ['1 年級', '2 年級', '3 年級', '4 年級']
+                    }
+                ]
+            },
+            'humanities': {
+                featured: {
+                    title: '人文學院',
+                    description: '培養跨文化理解能力，建立全球化視野。本課程將幫助你在多元文化的世界中游刃有餘。',
+                    buttonText: '總覽'
+                },
+                departments: [
+                {
+                        title: '社會',
+                        subtitle: 'Graduate School of Arts Management and Cultural Policy',
+                        years: ['1 年級', '2/3/4 年級']
+                    },
+                    {
+                        title: '自然與科技',
+                        subtitle: 'Graduate School of Arts Management and Cultural Policy',
+                        years: ['1 年級', '2/3/4 年級']
+                    },
+                    {
+                        title: '人文',
+                        subtitle: 'Graduate School of Arts and Humanities Instruction',
+                        years: ['1 年級', '2/3/4 年級']
+                    }
+                ]
+            },
+            'physical-education': {
+                featured: {
+                    title: '體育室熱門課程：運動科學與身心健康',
+                    description: '了解運動科學原理，學習如何通過運動提升身心健康。本課程將為你的健康生活方式奠定基礎。',
+                    buttonText: '總覽'
+                },
+                departments: [
+                {
+                        title: '一般體育',
+                        subtitle: 'General Physical Education',
+                        years: ['1 年級', '2/3/4 年級']
+                    },
+                    {
+                        title: '一般體育',
+                        subtitle: 'General Physical Education',
+                        years: ['1 年級', '2/3/4 年級']
+                    },
+                    {
+                        title: '專項運動',
+                        subtitle: 'Specialized Sports',
+                        years: ['1 年級', '2/3/4 年級']
+                    }
+                ]
+            }
+        };
+
+        function createFeaturedCard(featured) {
+            return `
+                <div class="featured-content">
+                    <h1 class="featured-title">${featured.title}</h1>
+                    <p class="featured-description">${featured.description}</p>
+                </div>
+                <a href="#" class="featured-button">${featured.buttonText}</a>
+            `;
+        }
+
+        function createDepartmentCard(department) {
+            const card = document.createElement('div');
+            card.className = 'department-card';
+
+            const header = document.createElement('div');
+            header.className = 'department-header';
+
+            const title = document.createElement('div');
+            title.className = 'department-title';
+            title.innerHTML = `<h2>${department.title}</h2><p>${department.subtitle}</p>`;
+
+            const arrow = document.createElement('div');
+            arrow.className = 'arrow-icon';
+            arrow.textContent = '→';
+
+            header.appendChild(title);
+            header.appendChild(arrow);
+
+            const content = document.createElement('div');
+            content.className = 'department-content';
+
+            if (department.content) {
+                content.innerHTML = `<p>${department.content}</p><p>${department.contentEn}</p>`;
+            } else if (department.years) {
+                const yearList = document.createElement('ul');
+                yearList.className = 'year-list';
+                department.years.forEach(year => {
+                    const yearItem = document.createElement('li');
+                    yearItem.className = 'year-item';
+                    yearItem.innerHTML = `<span>${year}</span><span>→</span>`;
+                    yearList.appendChild(yearItem);
+                });
+                content.appendChild(yearList);
+            }
+
+            card.appendChild(header);
+            card.appendChild(content);
+
+            return card;
+        }
+
+        function updateContent(departmentId) {
+            const featuredCard = document.getElementById('featured-card');
+            featuredCard.innerHTML = createFeaturedCard(departmentContent[departmentId].featured);
+
+            const contentArea = document.getElementById('department-content');
+            contentArea.innerHTML = '';
+
+            departmentContent[departmentId].departments.forEach(department => {
+                contentArea.appendChild(createDepartmentCard(department));
+            });
+        }
+
+        document.querySelector('.sidebar-menu').addEventListener('click', function(e) {
+            if (e.target.tagName === 'LI') {
+                document.querySelectorAll('.sidebar-menu li').forEach(item => item.classList.remove('active'));
+                e.target.classList.add('active');
+                updateContent(e.target.dataset.id);
+            }
+        });
+
+        // Initialize with the first menu item's content
+        updateContent('performing-arts');
+    </script>
+</body>
+</html>

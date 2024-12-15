@@ -1,0 +1,767 @@
+<!-- taiyigoodcourse.html -->
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>臺藝好課-2.0最高評價</title>
+
+    <link rel="icon" href="./img/nav_pic.png"> 
+
+<style>
+  /* styles.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #000;
+  color: #fff;
+  margin: 0; /* 移除預設的邊距 */
+  padding: 0;
+
+  /* 背景設定 */
+  background-image: url("./IMG/goodcourse-bg.png"); /* 替換為你的圖片路徑 */
+  background-size: 900px; /* 確保圖片填滿整個畫面 */
+  background-repeat: no-repeat; /* 避免圖片重複 */
+  background-position: right 100px bottom 70%; /* 將圖片置中 */
+  background-attachment: fixed; /* 固定背景 */
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #27272a;
+  position: sticky; /* 或用 position: fixed; */
+  top: 0; /* 将导航栏固定到页面顶部 */
+  z-index: 1000; /* 确保导航栏始终在前面 */
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+  color: #ff5d5d;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-logo {
+  margin-left: 205px;
+}
+.navbar-logo img {
+  width: 50%;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-right: 205px;
+}
+
+.main-nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  color: #a1a1aa;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #fff;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #27272a;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0;
+  min-width: 160px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.nav-item:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #a1a1aa;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.dropdown-item:hover {
+  background: #3f3f46;
+  color: #fff;
+}
+
+.search-container {
+  position: relative;
+  width: 256px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  background: #18181b;
+  border: 1px solid #3f3f46;
+  border-radius: 9999px;
+  color: #fff;
+  font-size: 0.875rem;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #71717a;
+}
+
+.main-content {
+  padding: 1.5rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(to right, #3d3d3d, #2a2a2a);
+  border: 1px solid #3f3f46;
+  border-radius: 9999px;
+  color: #fff;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.dropdown-icon {
+  color: #fff;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #27272a;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0;
+  min-width: 160px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #a1a1aa;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.dropdown-content a:hover {
+  background: #3f3f46;
+  color: #fff;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  align-items: center; /* 垂直置中對齊 */
+  margin-bottom: 300px; /* 增加與下方 footer 的距離 */
+}
+
+.course-card {
+  height: 200px;
+  width: 100%; /* 從400px改為100% */
+  background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.5));
+  color: white; /* 文字保持不透明 */
+  border-radius: 1rem;
+  overflow: hidden;
+  border: rgba(255, 255, 255, 0.5) solid 2px;
+  cursor: pointer;
+}
+
+.course-card:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(252, 90, 64, 1) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+}
+
+.course-content {
+  padding: 1rem 2rem;
+}
+
+.course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.course-info h3 {
+  font-size: 25px;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.course-info p {
+  color: #ffffff;
+  font-size: 0.875rem;
+}
+
+.course-button {
+  width: 70px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.course-button svg {
+  width: 30px;
+  height: 30px;
+  stroke: 0.1px #fff;
+}
+
+.course-rating {
+  height: 57px;
+  background: #fff;
+  padding: 1rem 1.8rem;
+  border-radius: 0 8rem 1rem 1rem;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.rating-content {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stars {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.star {
+  width: 20px;
+  height: 20px;
+  fill: #ff5d5d;
+}
+
+.rating-value {
+  font-size: 0.875rem;
+  color: #000;
+}
+
+.rating-count {
+  font-size: 0.875rem;
+  color: #71717a;
+  margin-left: 0.25rem;
+}
+
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 15px;
+  width: 800px;
+  position: relative;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 48px;
+}
+
+.course-department {
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.course-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+.course-rating02 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  color: #ff5d5d;
+}
+
+.modal .star {
+  fill: currentColor; /* 使用JS設定的顏色 */
+  justify-content: flex-start; /* 根據需要調整對齊方式 */
+}
+
+.rating-value {
+  font-size: 14px;
+  color: #000;
+}
+
+.rating-count {
+  font-size: 14px;
+  color: #666;
+  margin-left: 0.25rem;
+}
+
+.course-description {
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.see-more {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.see-more button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.see-more button:hover {
+  color: #000;
+}
+
+.bread {
+  display: flex;
+  align-items: center; /* 垂直居中對齊 */
+  gap: 8px; /* 每個元素的間距 */
+  font-size: 14px; /* 調整文字大小 */
+  color: white; /* 文字顏色 */
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center; /* 確保圖標與文字垂直居中 */
+  text-decoration: none; /* 去掉超連結下劃線 */
+  color: inherit; /* 繼承父容器文字顏色 */
+}
+
+.breadcrumb-item img {
+  width: 16px; /* 調整圖標大小 */
+  height: 16px;
+  margin-right: 4px; /* 圖標和文字的間距 */
+}
+
+.breadcrumb-separator {
+  color: white; /* 分隔符顏色 */
+  margin: 0 8px; /* 分隔符的間距 */
+  font-size: 16px;
+}
+
+.main-footer {
+  height: 100px;
+  width: auto;
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  background-color: black; /* 背景色，與圖三一致 */
+  padding: 10px 0; /* 上下內邊距 */
+  color: white; /* 文字顏色為白色 */
+  font-size: 17px; /* 調整文字大小 */
+}
+
+.footer {
+  display: flex;
+  gap: 250px; /* 調整元素之間的間距 */
+  align-items: center; /* 垂直置中對齊 */
+}
+
+.footer span,
+.footer a {
+  text-decoration: none; /* 去掉超連結下劃線 */
+  color: inherit; /* 繼承父元素的文字顏色 */
+}
+
+.footer a:hover {
+  text-decoration: underline; /* 滑鼠懸停時顯示下劃線 */
+}
+
+.course-teacher {
+  color: #000;
+}
+.course-schedule {
+  color: #000;
+}
+
+</style>
+
+  </head>
+  <body>
+    <div class="min-h-screen bg-black text-white">
+      <header class="header">
+        <a href="index.html" class="navbar-logo">
+          <img src="./img/nav_pic.png">
+        </a>
+        <div class="header-right">
+          <nav class="main-nav">
+            <div class="nav-item">
+              <a href="./page_6.0.html" class="nav-link">選課須知</a>
+            </div>
+
+            <div class="nav-item">
+              <a href="./page_3.0.html" class="nav-link">院系/通識課程</a>
+              <div class="dropdown-menu">
+                <a href="./page_3.0.html" class="dropdown-item">美術學院</a>
+                <a href="./page_3.0.html" class="dropdown-item">設計學院</a>
+                <a href="./page_3.0.html" class="dropdown-item">傳播學院</a>
+                <a href="./page_3.0.html" class="dropdown-item">表演藝術學院</a>
+                <a href="./page_3.0.html" class="dropdown-item">人文學院</a>
+                <a href="./page_3.0.html" class="dropdown-item">體育</a>
+              </div>
+            </div>
+            <div class="nav-item">
+              <a href="./page_3.2.html" class="nav-link">課程討論</a>
+              <div class="dropdown-menu">
+                <a href="./page_1.1.html" class="dropdown-item">討論區</a>
+                <a href="./page_2.0.html" class="dropdown-item">最高評價</a>
+                <a href="./page_1.0.html" class="dropdown-item">熱門討論</a>
+              </div>
+            </div>
+            <div class="nav-item">
+              <a href="./page_4.0.html" class="nav-link">換課區</a>
+              <div class="dropdown-menu">
+                <a href="./page_4.0.html" class="dropdown-item">許願</a>
+                <a href="./page_4.1.html" class="dropdown-item">交換</a>
+              </div>
+            </div>
+            <a href="./page_5.0.html" class="nav-link">登入</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <div class="bread">
+          <a href="./index.html" class="breadcrumb-item">
+            <img src="./img/home.png" alt="Home Icon" />
+            <span>首頁</span>
+          </a>
+          <span class="breadcrumb-separator">></span>
+          <a href="./page_2.0.html" class="breadcrumb-item">
+            <span>最高評價</span>
+          </a>
+        </div>
+        <br />
+
+        <div class="filters">
+          <div class="dropdown">
+            <button class="dropdown-button">
+              院系別
+              <svg
+                class="dropdown-icon"
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+              >
+                <path
+                  d="M6 9L12 15L18 9"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <div class="dropdown-content">
+              <a href="#">美術學院</a>
+              <a href="#">設計學院</a>
+              <a href="#">傳播學院</a>
+              <a href="#">表演藝術學院</a>
+              <a href="#">人文學院</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button class="dropdown-button">
+              高低排序
+              <svg
+                class="dropdown-icon"
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+              >
+                <path
+                  d="M6 9L12 15L18 9"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <div class="dropdown-content">
+              <a href="#">由高至低</a>
+              <a href="#">由低至高</a>
+            </div>
+          </div>
+        </div>
+
+        <div id="course-list" class="course-grid">
+          <!-- Course cards will be dynamically generated -->
+        </div>
+      </main>
+    </div>
+
+    <!-- 課程詳情彈出視窗 -->
+    <div id="courseModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-body">
+          <div class="course-department"></div>
+          <h2 class="course-title"></h2>
+          <div class="course-rating02">
+            <div class="stars"></div>
+            <span class="rating-value"></span>
+            <span class="rating-count"></span>
+              <div class="course-teacher"></div>
+    <div class="course-schedule"></div>
+          </div>
+          <p class="course-description"></p>
+          <div class="see-more" onclick="location.href='./page_3.2.html';">
+            <button onclick="location.href='./page_3.2.html';">
+              去看更多
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-footer">
+      <div class="footer">
+        <span>220307新北市板橋區大觀路一段59號</span>
+        <span>電話：02-2272-2181 </span>
+        <a href="https://www.ntua.edu.tw">學校網址：https://www.ntua.edu.tw</a>
+      </div>
+    </div>
+   <!--<script src="script.js"></script>---> 
+  </body>
+</html>
+
+  <!--<script src="script.js"></script>--->  
+
+<script>
+  // script.js
+
+// 1. 生成課程卡片
+document.addEventListener("DOMContentLoaded", function () {
+  const courses = Array(15).fill({
+    title: "網站設計<br>與數位剪輯",
+    department: "Website Design & <br>Video Editing",
+    rating: 4.7,
+    reviews: "顆星",
+  });
+
+  const courseList = document.getElementById("course-list");
+
+  courses.forEach((course) => {
+    const courseCard = document.createElement("div");
+    courseCard.className = "course-card";
+    courseCard.innerHTML = `
+      <div class="course-content">
+        <div class="course-header">
+          <div class="course-info">
+            <h3>${course.title}</h3>
+            <p>${course.department}</p>
+          </div>
+          <button class="course-button">
+            <svg width="37" height="38" viewBox="0 0 37 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.30272 2.35308L34.8205 2.36625L34.8073 28.8916" stroke="white" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M34.8201 2.36663L1.20361 35.9497" stroke="white" stroke-width="3" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="course-rating">
+        <div class="stars">
+          ${Array(5)
+            .fill()
+            .map(
+              () => `
+              <svg class="star" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            `
+            )
+            .join("")}
+        </div>
+        <span class="rating-value">${course.rating}</span>
+        <span class="rating-count">${course.reviews}</span>
+      </div>
+    `;
+    courseList.appendChild(courseCard);
+  });
+});
+
+// 2. Modal 彈窗邏輯
+document.addEventListener("DOMContentLoaded", function () {
+  const modal = document.getElementById("courseModal");
+  const closeBtn = modal.querySelector(".close");
+  const courseCards = document.querySelectorAll(".course-card"); // 假設課程卡片有 'course-card' 類
+
+  // 課程數據（此例中所有課程相同）
+  const courseData = {
+    department: "設計學院 視覺傳達設計學系",
+    title: "網站設計<br>與數位剪輯",
+    rating: 4.7,
+    teacher: "教師：林昱萱",
+    schedule: "時間：(一) 6-8",
+    description:
+      "課程概要：讓學生了解目前製作網站應熟悉的基本程式語法及軟體，包含：HTML語法、基礎JavaScript語法、兩種以上版面設計繪圖軟體、網頁上傳軟體(FTP)、如何申請個人網址(付費或免費)、上傳網頁所應注意事項、網路相關智慧財產權探討等。 並介紹網站具備項目，包含：安全政策、隱私保護服務宣告、聯絡方式、Site Map設計、Credit設計、最近更新時間標示、提供兩種以上語文版等。 課中並將介紹國內外設計實用、酷炫及流量較高的網站，並且選擇數個作為期中範例考試及期末範例作業發表，讓學生實際完成一個網站作品，強化實務操作能力。 ",
+  };
+
+  function openModal() {
+    modal.style.display = "flex";
+    modal.querySelector(".course-department").innerHTML = courseData.department;
+    modal.querySelector(".course-title").innerHTML = courseData.title;
+    modal.querySelector(".rating-value").textContent = courseData.rating;
+    modal.querySelector(".course-teacher").textContent = courseData.teacher;
+    modal.querySelector(".course-schedule").textContent = courseData.schedule;
+    modal.querySelector(".course-description").textContent =
+      courseData.description;
+
+    // 顯示星星評分
+    const starsContainer = modal.querySelector(".stars");
+    starsContainer.innerHTML = ""; // 清空舊的星星
+    for (let i = 0; i < 5; i++) {
+      const star = document.createElement("svg");
+      star.classList.add("star");
+      star.setAttribute("viewBox", "0 0 20 20");
+      star.innerHTML = `
+       <svg class="star" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+      `;
+      star.style.fill = i < Math.round(courseData.rating) ? "#ff5d5d" : "#ccc";
+      starsContainer.appendChild(star);
+    }
+  }
+
+  function closeModal() {
+    modal.style.display = "none";
+  }
+
+  courseCards.forEach((card) => {
+    card.addEventListener("click", openModal);
+  });
+
+  closeBtn.addEventListener("click", closeModal);
+  window.addEventListener("click", function (event) {
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
+});
+
+// 3. Dropdown 選單邏輯
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".dropdown-button").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const content = e.currentTarget.nextElementSibling;
+      content.style.display =
+        content.style.display === "block" ? "none" : "block";
+    });
+  });
+});
+
+</script>
+
+  </body>
+</html>

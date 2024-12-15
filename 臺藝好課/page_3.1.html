@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>臺藝好課-3.1</title>
+
+    <link rel="icon" href="./img/nav_pic.png"> 
+
+<style>
+  body {
+  margin: 0;
+  height: 100vh;
+}
+.Background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+body {
+  background-color: black;
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+body {
+  font-family: "Noto Sans TC", sans-serif;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky; /* 或用 position: fixed; */
+  top: 0; /* 将导航栏固定到页面顶部 */
+  z-index: 1000; /* 确保导航栏始终在前面 */
+  background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  }
+  
+  .navbar-logo {
+    margin-left: 205px;
+  }
+
+  .navbar-logo img {
+    width: 50%;
+    height: 50%;
+  }
+
+  .nav-container {
+  display: flex;
+  align-items: center;
+  margin-right: 205px;
+  }
+  
+  .main-nav {
+  display: flex;
+  gap: 1.5rem;
+  margin-right: 2rem;
+  }
+  
+  .nav-item {
+  position: relative;
+  }
+  
+  .nav-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s;
+  }
+  
+  .nav-link:hover {
+  color: var(--text-color);
+  }
+  
+  .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 200px;
+  background-color: #000000;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  }
+  
+  .nav-item:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  }
+  
+  .dropdown-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: rgba(166, 166, 166, 0.7);
+  text-decoration: none;
+  transition: background-color 0.3s;
+  }
+  
+  .dropdown-item:hover {
+  background-color: #242424;
+  color: #ffffff;
+  }
+  
+  .search-container {
+  position: relative;
+  width: 16rem;
+  }
+  
+  .search-input {
+  width: 100%;
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  }
+  
+  .search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.5);
+  }
+  /*header*/
+.discuss_bread-item img {
+  width: 25px;
+  height: 25px;
+  margin-right: 15px;
+  margin-left: 0;
+}
+.discuss_bread {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 53px;
+  margin-top: 82px;
+  max-width: 1200px;
+  margin-left: 234px;
+  margin-right: auto;
+  padding: 0 20px;
+}
+.department {
+  margin-left: 0px;
+
+  margin: 0 auto;
+  padding: 0 20px;
+  background: linear-gradient(rgba(230, 222, 222, 0.5), rgba(0, 0, 0, 0.5));
+
+  height: 356px;
+
+  width: 1320px;
+
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.discuss_bread-item {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #ffffff;
+  margin-right: 15px;
+}
+
+.discuss_bread-separator {
+  margin-right: 15px;
+  font-size: 20px;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.discuss_bread a:last-child,
+.discuss_bread-separator:last-child {
+  margin-right: 0;
+}
+
+.department-name {
+  font-size: 36px;
+  font-weight: 600;
+  color: #ffffff;
+  padding-top: 44px;
+}
+.department-english {
+  font-size: 24px;
+  margin-top: 6px;
+  color: #ffffff;
+}
+.select-group {
+  display: flex;
+  gap: 11px;
+}
+.comment_option-style {
+  padding: 10px;
+  border-radius: 70px;
+  border: none;
+  margin-top: 49px;
+  color: #fff;
+  font-size: 20px;
+  font-family: "Noto Sans TC", sans-serif;
+  height: 50px;
+  width: 210px;
+  background-color: rgba(217, 217, 217, 0.3);
+  padding: 6px 12px;
+  line-height: 2.2;
+}
+
+.comment_option-style option {
+  padding: 8px 12px;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 14px;
+}
+.comment-container {
+  display: flex;
+  flex-direction: column;
+  width: calc(33.33% - 56px);
+  margin-right: 42px;
+  margin-bottom: 20px;
+}
+
+.comment_course {
+  position: relative;
+  width: 100%; /* 改為響應式寬度 */
+  max-width: 387px; /* 添加最大寬度以保持原始尺寸 */
+  height: 304px;
+  border-radius: 10px;
+  background-image: url("./img/comment_course.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 20px;
+  margin-top: 66px;
+}
+
+.text-1,
+.text-2,
+.text-3 {
+  position: relative;
+  color: #3d3d3d;
+  z-index: 1;
+}
+
+.text-1 {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border: 2px solid #fc5a40;
+  border-radius: 50px;
+  margin-bottom: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 91px;
+  height: 38px;
+  margin-top: 10px;
+  text-align: center;
+}
+.text-2 {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.text-3 {
+  font-size: 16px;
+  padding-bottom: 10px;
+  margin-top: 9px;
+}
+
+.arrow {
+  position: absolute;
+  top: 19px;
+  right: 22px;
+  width: auto;
+  height: auto;
+}
+.bottom-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #d9d9d9;
+}
+
+.text-4,
+.text-5 {
+  margin-top: 12px;
+}
+.bottom-row img {
+  height: 24px;
+  width: auto;
+  margin-top: 12px;
+}
+
+.bottom-row p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.comment-container-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.comment-container {
+  display: flex;
+  flex-direction: column;
+  width: calc(33.33% - 56px);
+  margin-right: 42px;
+  margin-bottom: 20px;
+}
+
+.page_midd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-top: 20px;
+}
+
+.centered-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+}
+
+footer {
+  background-color: black;  /* 黑色底色 */
+  color: white;             /* 白色文字 */
+  text-align: center;       /* 文字置中 */
+  padding: 5px 0;          /* 上下內邊距 */        /* 固定在頁面底部 */
+  bottom: 0;
+  width: 100%;              /* 佔滿整個頁面寬度 */
+  height: 70px;
+  margin-top: 2000px;
+}
+
+footer p {
+  margin: 16px 0px;
+}
+
+</style>
+
+  </head>
+  <body>
+    <div class="Background">
+      <img src="./img/comment_bg.png" alt="Background" />
+    </div>
+    <div class="container">
+      <header class="header">
+        <div class="navbar-logo">
+          <a href="index.html">
+        <img src="./img/nav_pic.png">
+      </a>
+        </div>
+        <div class="nav-container">
+          <nav class="main-nav">
+            <div class="nav-item">
+              <a href="page_6.0.html" class="nav-link">選課須知</a>
+            </div>
+  
+            <div class="nav-item">
+              <a href="page_3.0.html" class="nav-link">院系/通識課程</a>
+              <div class="dropdown">
+                <a href="page_3.0.html" class="dropdown-item">設計學院</a>
+                <a href="page_3.0.html" class="dropdown-item">美術學院</a>
+                <a href="page_3.0.html" class="dropdown-item">傳播學院</a>
+                <a href="page_3.0.html" class="dropdown-item">表演學院</a>
+                <a href="page_3.0.html" class="dropdown-item">人文學院</a>
+                <a href="page_3.0.html" class="dropdown-item">體育學院</a>
+              </div>
+            </div>
+            <div class="nav-item">
+              <a href="./page_3.2.html" class="nav-link">課程討論</a>
+              <div class="dropdown">
+                <a href="./page_1.1.html" class="dropdown-item">討論區</a>
+                <a href="page_2.0.html" class="dropdown-item">最高評價</a>
+                <a href="page_1.0.html" class="dropdown-item">熱門討論</a>
+              </div>
+            </div>
+            <div class="nav-item">
+                <a href="./page_4.0.html" class="nav-link">換課區</a>
+                <div class="dropdown">
+                  <a href="./page_4.0.html" class="dropdown-item">許願</a>
+                  <a href="./page_4.1.html" class="dropdown-item">交換</a>
+                </div>
+              </div>
+            <a href="page_5.0.html" class="nav-link">登入</a>
+          </nav>
+  
+        </div>
+      </header>
+      <div class="page_midd">
+        <div class="discuss_bread">
+          <a href="#" class="discuss_bread-item">
+            <img src="./img/comment_home .png" alt="Home Icon" />
+            <span>首頁</span>
+          </a>
+          <span class="discuss_bread-separator">&gt;</span>
+          <a href="#" class="discuss_bread-item">
+            <span>最高評價</span>
+          </a>
+          <span class="discuss_bread-separator">&gt;</span>
+          <a href="#" class="discuss_bread-item">
+            <span>最高評價</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="department">
+        <p class="department-name">視覺傳達設計學系</p>
+        <p class="department-english">
+          Department of Visual Communication Design
+        </p>
+        <div class="select-group">
+          <select class="comment_option-style option-3.1.1">
+            <option disabled selected hidden>課程種類</option>
+            <option value="院必修">院必修</option>
+            <option value="院選修">院選修</option>
+            <option value="系選修">系選修</option>
+            <option value="系必修">系必修</option>
+          </select>
+          <select class="comment_option-style option-3.1.2">
+            <option disabled selected hidden>年級</option>
+            <option value="一年級">一年級</option>
+            <option value="二年級">二年級</option>
+            <option value="三年級">三年級</option>
+            <option value="四年級">四年級</option>
+          </select>
+        </div>
+        <div class="comment-container-wrapper">
+          <div class="comment-container">
+            <div class="comment_course">
+              <p class="text-1">二年級</p>
+              <p class="text-2">網站設計<br />與數位剪輯</p>
+              <p class="text-3">
+                Website Design &><br />
+                Video Editing
+              </p>
+              <img src="./img/comment_arrow.png" class="arrow" />
+              <div class="bottom-row">
+                <img src="./img/comment_alarm.png" />
+                <p class="text-4">（一）六--八</p>
+                <img src="./img/comment_people.png" />
+                <p class="text-5">林昱萱</p>
+              </div>
+            </div>
+          </div>
+          <div class="comment-container">
+            <div class="comment_course">
+              <p class="text-1">二年級</p>
+              <p class="text-2">網站設計<br />與數位剪輯</p>
+              <p class="text-3">
+                Website Design &><br />
+                Video Editing
+              </p>
+              <img src="./img/comment_arrow.png" class="arrow" />
+              <div class="bottom-row">
+                <img src="./img/comment_alarm.png" />
+                <p class="text-4">（一）六--八</p>
+                <img src="./img/comment_people.png" />
+                <p class="text-5">林昱萱</p>
+              </div>
+            </div>
+          </div>
+          <div class="comment-container">
+            <div class="comment_course">
+              <p class="text-1">二年級</p>
+              <p class="text-2">網站設計<br />與數位剪輯</p>
+              <p class="text-3">
+                Website Design &><br />
+                Video Editing
+              </p>
+              <img src="./img/comment_arrow.png" class="arrow" />
+              <div class="bottom-row">
+                <img src="./img/comment_alarm.png" />
+                <p class="text-4">（一）六--八</p>
+                <img src="./img/comment_people.png" />
+                <p class="text-5">林昱萱</p>
+              </div>
+            </div>
+          </div>
+          <div class="comment-container">
+            <div class="comment_course">
+              <p class="text-1">二年級</p>
+              <p class="text-2">網站設計<br />與數位剪輯</p>
+              <p class="text-3">
+                Website Design &><br />
+                Video Editing
+              </p>
+              <img src="./img/comment_arrow.png" class="arrow" />
+              <div class="bottom-row">
+                <img src="./img/comment_alarm.png" />
+                <p class="text-4">（一）六--八</p>
+                <img src="./img/comment_people.png" />
+                <p class="text-5">林昱萱</p>
+              </div>
+            </div>
+          </div>
+          <div class="comment-container">
+            <div class="comment_course">
+              <p class="text-1">二年級</p>
+              <p class="text-2">網站設計<br />與數位剪輯</p>
+              <p class="text-3">
+                Website Design &><br />
+                Video Editing
+              </p>
+              <img src="./img/comment_arrow.png" class="arrow" />
+              <div class="bottom-row">
+                <img src="./img/comment_alarm.png" />
+                <p class="text-4">（一）六--八</p>
+                <img src="./img/comment_people.png" />
+                <p class="text-5">林昱萱</p>
+              </div>
+            </div>
+          </div>
+          <div class="comment-container">
+            <div class="comment_course">
+              <p class="text-1">二年級</p>
+              <p class="text-2">網站設計<br />與數位剪輯</p>
+              <p class="text-3">
+                Website Design &><br />
+                Video Editing
+              </p>
+              <img src="./img/comment_arrow.png" class="arrow" />
+              <div class="bottom-row">
+                <img src="./img/comment_alarm.png" />
+                <p class="text-4">（一）六--八</p>
+                <img src="./img/comment_people.png" />
+                <p class="text-5">林昱萱</p>
+              </div>
+            </div>
+          </div>
+          <div class="comment-container">
+            <div class="comment_course">
+              <p class="text-1">二年級</p>
+              <p class="text-2">網站設計<br />與數位剪輯</p>
+              <p class="text-3">
+                Website Design &><br />
+                Video Editing
+              </p>
+              <img src="./img/comment_arrow.png" class="arrow" />
+              <div class="bottom-row">
+                <img src="./img/comment_alarm.png" />
+                <p class="text-4">（一）六--八</p>
+                <img src="./img/comment_people.png" />
+                <p class="text-5">林昱萱</p>
+              </div>
+            </div>
+          </div>
+          <div class="comment-container">
+            <div class="comment_course">
+              <p class="text-1">二年級</p>
+              <p class="text-2">網站設計<br />與數位剪輯</p>
+              <p class="text-3">
+                Website Design &><br />
+                Video Editing
+              </p>
+              <img src="./img/comment_arrow.png" class="arrow" />
+              <div class="bottom-row">
+                <img src="./img/comment_alarm.png" />
+                <p class="text-4">（一）六--八</p>
+                <img src="./img/comment_people.png" />
+                <p class="text-5">林昱萱</p>
+              </div>
+            </div>
+          </div>
+          <div class="comment-container">
+            <div class="comment_course">
+              <p class="text-1">二年級</p>
+              <p class="text-2">網站設計<br />與數位剪輯</p>
+              <p class="text-3">
+                Website Design &><br />
+                Video Editing
+              </p>
+              <img src="./img/comment_arrow.png" class="arrow" />
+              <div class="bottom-row">
+                <img src="./img/comment_alarm.png" />
+                <p class="text-4">（一）六--八</p>
+                <img src="./img/comment_people.png" />
+                <p class="text-5">林昱萱</p>
+              </div>
+            </div>
+          </div>
+          <div class="comment-container">
+            <div class="comment_course">
+              <p class="text-1">二年級</p>
+              <p class="text-2">網站設計<br />與數位剪輯</p>
+              <p class="text-3">
+                Website Design &><br />
+                Video Editing
+              </p>
+              <img src="./img/comment_arrow.png" class="arrow" />
+              <div class="bottom-row">
+                <img src="./img/comment_alarm.png" />
+                <p class="text-4">（一）六--八</p>
+                <img src="./img/comment_people.png" />
+                <p class="text-5">林昱萱</p>
+              </div>
+            </div>
+          </div>
+          <div class="comment-container">
+            <div class="comment_course">
+              <p class="text-1">二年級</p>
+              <p class="text-2">網站設計<br />與數位剪輯</p>
+              <p class="text-3">
+                Website Design &><br />
+                Video Editing
+              </p>
+              <img src="./img/comment_arrow.png" class="arrow" />
+              <div class="bottom-row">
+                <img src="./img/comment_alarm.png" />
+                <p class="text-4">（一）六--八</p>
+                <img src="./img/comment_people.png" />
+                <p class="text-5">林昱萱</p>
+              </div>
+            </div>
+          </div>
+          <div class="comment-container">
+            <div class="comment_course">
+              <p class="text-1">二年級</p>
+              <p class="text-2">網站設計<br />與數位剪輯</p>
+              <p class="text-3">
+                Website Design &><br />
+                Video Editing
+              </p>
+              <img src="./img/comment_arrow.png" class="arrow" />
+              <div class="bottom-row">
+                <img src="./img/comment_alarm.png" />
+                <p class="text-4">（一）六--八</p>
+                <img src="./img/comment_people.png" />
+                <p class="text-5">林昱萱</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <footer>
+      <p>&copy; 220307新北市板橋區大觀路一段59號&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;電話：02-2272-2181&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;學校網址：https://www.ntua.edu.tw/</p>
+    </footer>
+
+  </body>
+</html>

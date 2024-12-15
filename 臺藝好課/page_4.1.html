@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>臺藝好課-4.1換課區-交換</title>
+
+    <link rel="icon" href="./img/nav_pic.png"> 
+
+<style>
+    
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    background-color: #000;
+    background-image: url(./img/background.png);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    padding: 1rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky; /* 或用 position: fixed; */
+  top: 0; /* 将导航栏固定到页面顶部 */
+  z-index: 1000; /* 确保导航栏始终在前面 */
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-logo {
+margin-left: 205px;
+}
+
+.navbar-logo img {
+    width: 50px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    margin-right: 205px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+    
+
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.btn {
+    padding: 0.75rem 2rem;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #ff5f45;
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.section {
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.dropdown-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.dropdown {
+    position: relative;
+    width: 100%;
+    background-color: aliceblue;
+    border-radius: 70px;
+}
+
+.dropdown select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 8px;
+    color: #000000;
+    appearance: none;
+    cursor: pointer;
+}
+
+.dropdown::after {
+    content: "▼";
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.add-course {
+    display: block;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin:auto;
+}
+
+.add-course svg {
+    width: 20px;
+    height: 20px;
+}
+
+div .png {
+    display: block;
+}
+
+.message-box {
+    background: rgba(42, 42, 42, 0.8);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.message-input {
+    width: 100%;
+    min-height: 100px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    resize: none;
+    outline: none;
+}
+
+.message-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.message-action {
+    color: rgba(255, 255, 255, 0.5);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-button {
+    display: block;
+    margin: 0 auto;
+    padding: 0.75rem 3rem;
+}
+
+footer {
+  background-color: black;  /* 黑色底色 */
+  color: white;             /* 白色文字 */
+  text-align: center;       /* 文字置中 */
+  padding: 5px 0;          /* 上下內邊距 */        /* 固定在頁面底部 */
+  bottom: 0;
+  width: 100%;              /* 佔滿整個頁面寬度 */
+  height: 70px;
+}
+
+footer p {
+  margin: 16px 0px;
+}
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .dropdown-group {
+        grid-template-columns: 1fr;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}
+</style>
+
+
+</head>
+<body>
+
+    <header class="header">
+        <nav class="nav">
+            <a href="./index.html" class="navbar-logo">
+                <img src="./img/nav_pic.png">
+            </a>
+            <div class="nav-links">
+                <a href="./page_6.0.html">選課須知</a>
+                <a href="./page_3.0.html">院系/通識課程</a>
+                <a href="./page_3.2.html">課程討論</a>
+                <a href="./page_4.0.html">換課區</a>
+                <a href="./page_5.0.html">登入</a>
+            </div>
+        </nav>
+    </header>                          
+
+    <main class="main-content">
+        <div class="action-buttons">
+            <button class="btn btn-primary">課換課</button>
+            <button class="btn btn-secondary">求課</button>
+            <button class="btn btn-secondary">釋出</button>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">持有課程</h2>
+            <div class="dropdown-group">
+                <div class="dropdown">
+                    <select>
+                        <option value="" disabled selected>學院</option>
+                        <option>表演藝術學院</option>
+                        <option>設計學院</option>
+                        <option>美術學院</option>
+                        <option>傳播學院</option>
+                        <option>人文學院</option>
+                    </select>
+                </div>
+                <div class="dropdown">
+                    <select>
+                        <option value="" disabled selected>課程類別</option>
+                        <option>必修課程</option>
+                        <option>選修課程</option>
+                        <option>通識課程</option>
+                    </select>
+                </div>
+                <div class="dropdown">
+                    <select>
+                        <option value="" disabled selected>年級</option>
+                        <option>一年級</option>
+                        <option>二年級</option>
+                        <option>三年級</option>
+                        <option>四年級</option>
+                    </select>
+                </div>
+                <div class="dropdown">
+                    <select>
+                        <option value="" disabled selected>課程名稱</option>
+                    </select>
+                </div>
+            </div>
+            <button class="add-course">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="16"/>
+                    <line x1="8" y1="12" x2="16" y2="12"/>
+                </svg>
+                新增其他課程
+            </button>
+        </section>
+
+        <div class="png" >
+            <img src="./img/arroe_4.1.png">
+            <style>
+                div {
+                  text-align: center;
+                }
+              </style>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">欲求課程</h2>
+            <div class="dropdown-group">
+                <div class="dropdown">
+                    <select>
+                        <option value="" disabled selected>學院</option>
+                        <option>表演藝術學院</option>
+                        <option>設計學院</option>
+                        <option>美術學院</option>
+                        <option>傳播學院</option>
+                        <option>人文學院</option>
+                    </select>
+                </div>
+                <div class="dropdown">
+                    <select>
+                        <option value="" disabled selected>課程類別</option>
+                        <option>必修課程</option>
+                        <option>選修課程</option>
+                        <option>通識課程</option>
+                    </select>
+                </div>
+                <div class="dropdown">
+                    <select>
+                        <option value="" disabled selected>其他</option>
+                    </select>
+                </div>
+            </div>
+            <button class="add-course">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="16"/>
+                    <line x1="8" y1="12" x2="16" y2="12"/>
+                </svg>
+                新增其他課程
+            </button>
+        </section>
+
+        <div class="message-box">
+            <textarea class="message-input" placeholder="想說的話..."></textarea>
+            <div class="message-actions">
+                <button class="message-action">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                    </svg>
+                </button>
+                <button class="message-action">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10H3M21 6H3M21 14H3M21 18H3"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <button class="btn btn-primary submit-button">送出</button>
+    </main>
+
+    <footer>
+        <p>&copy; 220307新北市板橋區大觀路一段59號&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;電話：02-2272-2181&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;學校網址：https://www.ntua.edu.tw/</p>
+      </footer>
+</body>
+</html>

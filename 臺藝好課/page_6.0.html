@@ -1,0 +1,660 @@
+<!-- taiyigoodcourse.html -->
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>臺藝好課_6.0選課須知</title>
+
+    <link rel="icon" href="./img/nav_pic.png"> 
+
+<style>
+  /* styles.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #000;
+  color: #fff;
+  margin: 0; /* 移除預設的邊距 */
+  padding: 0;
+
+  /* 背景設定 */
+  background-image: url("./img/goodcourse-bg.png"); /* 替換為你的圖片路徑 */
+  background-size: 900px; /* 確保圖片填滿整個畫面 */
+  background-repeat: no-repeat; /* 避免圖片重複 */
+  background-position: right 100px bottom 70%; /* 將圖片置中 */
+  background-attachment: fixed; /* 固定背景 */
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky; /* 或用 position: fixed; */
+  top: 0; /* 将导航栏固定到页面顶部 */
+  z-index: 1000; /* 确保导航栏始终在前面 */
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 60px;
+  }
+  
+  .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  }
+  
+  .navbar-logo {
+    margin-left: 205px;
+  }
+
+  .navbar-logo img {
+    width: 50%;
+    height: 50%;
+  }
+
+  .nav-container {
+  display: flex;
+  align-items: flex-start;
+  margin-right: 205px;
+  }
+  
+  .main-nav {
+  display: flex;
+  gap: 1rem;
+  margin-right: 2rem;
+  }
+  
+  .nav-item {
+  position: relative;
+  }
+  
+  .nav-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s;
+  }
+  
+  .nav-link:hover {
+  color: var(--text-color);
+  }
+  
+  .dropdown {
+  position: fixed;
+  top: 30px;
+  left: 0;
+  background-color: #000000;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  }
+  
+  .nav-item:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  }
+  
+  .dropdown-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: rgba(166, 166, 166, 0.7);
+  text-decoration: none;
+  transition: background-color 0.3s;
+  }
+  
+  .dropdown-item:hover {
+  background-color: #242424;
+  color: #ffffff;
+  }
+  
+  .search-container {
+  position: relative;
+  width: 16rem;
+  }
+  
+  .search-input {
+  width: 100%;
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  }
+  
+  .search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.5);
+  }
+  
+
+
+.main-content {
+  padding: 1.5rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.credit-sorts {
+  display: flex !important;
+  justify-content: center !important; /* 水平置中 */
+  padding: 1rem 0;
+  padding-right: 10rem;
+}
+
+.credit-sorts-pic {
+  display: block !important; /* 強制設為區塊元素 */
+  margin: 0 auto !important; /* 水平置中 */
+  padding: 5rem 0;
+}
+/* 
+img {
+  width: 60% !important;
+} */
+.department-credit {
+  padding: 3rem 0;
+}
+.dropdown {
+  position: relative;
+}
+
+.dropdown-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(to right, #3d3d3d, #2a2a2a);
+  border: 1px solid #3f3f46;
+  border-radius: 9999px;
+  color: #fff;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.dropdown-icon {
+  color: #fff;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #27272a;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0;
+  min-width: 160px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #a1a1aa;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.dropdown-content a:hover {
+  background: #3f3f46;
+  color: #fff;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  align-items: center; /* 垂直置中對齊 */
+  margin-bottom: 300px; /* 增加與下方 footer 的距離 */
+}
+
+.course-card {
+  height: 200px;
+  width: 100%; /* 從400px改為100% */
+  background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.5));
+  color: white; /* 文字保持不透明 */
+  border-radius: 1rem;
+  overflow: hidden;
+  border: rgba(255, 255, 255, 0.5) solid 2px;
+  cursor: pointer;
+}
+
+.course-card:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(252, 90, 64, 1) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+}
+
+.course-content {
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.course-info h3 {
+  font-size: 25px;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.course-info p {
+  color: #ffffff;
+  font-size: 0.875rem;
+}
+
+.course-button {
+  width: 70px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.course-button svg {
+  width: 30px;
+  height: 30px;
+  stroke: 0.1px #fff;
+}
+
+.course-rating {
+  height: 57px;
+  background: #fff;
+  padding: 1rem 1.8rem;
+  border-radius: 0 8rem 1rem 1rem;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.rating-content {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stars {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.star {
+  width: 20px;
+  height: 20px;
+  fill: #ff5d5d;
+}
+
+.rating-value {
+  font-size: 0.875rem;
+  color: #000;
+}
+
+.rating-count {
+  font-size: 0.875rem;
+  color: #71717a;
+  margin-left: 0.25rem;
+}
+
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 15px;
+  width: 800px;
+  position: relative;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 48px;
+}
+
+.course-department {
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.course-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+.course-rating02 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  color: #ff5d5d;
+}
+
+.modal .star {
+  fill: currentColor; /* 使用JS設定的顏色 */
+  justify-content: flex-start; /* 根據需要調整對齊方式 */
+}
+
+.rating-value {
+  font-size: 14px;
+  color: #000;
+}
+
+.rating-count {
+  font-size: 14px;
+  color: #666;
+  margin-left: 0.25rem;
+}
+
+.course-description {
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.see-more {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.see-more button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.see-more button:hover {
+  color: #000;
+}
+
+.bread {
+  display: flex;
+  align-items: center; /* 垂直居中對齊 */
+  gap: 8px; /* 每個元素的間距 */
+  font-size: 14px; /* 調整文字大小 */
+  color: white; /* 文字顏色 */
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center; /* 確保圖標與文字垂直居中 */
+  text-decoration: none; /* 去掉超連結下劃線 */
+  color: inherit; /* 繼承父容器文字顏色 */
+}
+
+.breadcrumb-item img {
+  width: 16px; /* 調整圖標大小 */
+  height: 16px;
+  margin-right: 4px; /* 圖標和文字的間距 */
+}
+
+.breadcrumb-separator {
+  color: white; /* 分隔符顏色 */
+  margin: 0 8px; /* 分隔符的間距 */
+  font-size: 16px;
+}
+
+.main-footer {
+  height: 100px;
+  width: auto;
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  background-color: black; /* 背景色，與圖三一致 */
+  padding: 10px 0; /* 上下內邊距 */
+  color: white; /* 文字顏色為白色 */
+  font-size: 17px; /* 調整文字大小 */
+}
+
+footer {
+  background-color: black;  /* 黑色底色 */
+  color: white;             /* 白色文字 */
+  text-align: center;       /* 文字置中 */
+  padding: 5px 0;          /* 上下內邊距 */        /* 固定在頁面底部 */
+  bottom: 0;
+  width: 100%;              /* 佔滿整個頁面寬度 */
+  height: 70px;
+}
+
+footer p {
+  margin: 16px 0px;
+}
+.course-teacher {
+  color: #000;
+}
+.course-schedule {
+  color: #000;
+}
+
+.course-card {
+  display: block; /* 確保卡片顯示 */
+  background-color: rgba(255, 255, 255, 0.1); /* 可選：設置背景 */
+  border-radius: 8px; /* 可選：卡片圓角 */
+  padding: 1rem; /* 可選：內邊距 */
+  color: #fff; /* 確保文字可見 */
+  position: relative;
+  min-height: 200px;
+}
+.course-info-text {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: #d9d9d9;
+  color: #3d3d3d;
+  padding: 5px 60% 5px 40px;
+  border-radius: 0px 100px 0px 15px;
+}
+.course-info-text p {
+  font-size: 1rem; /* 調整文字大小 */
+  color: #3d3d3d; /* 文字顏色 */
+  text-align: left; /* 可選：文字置中 */
+  margin: 8px 0;
+}
+.schedule-time h1 {
+  padding: 3rem 0;
+}
+
+</style>
+
+  </head>
+  <body>
+    <div class="min-h-screen bg-black text-white">
+      <header class="header">
+        <div class="navbar-logo">
+          <a href="index.html">
+        <img src="./img/nav_pic.png">
+      </a>
+        </div>
+        <div class="nav-container">
+          <nav class="main-nav">
+            <div class="nav-item">
+              <a href="page_6.0.html" class="nav-link">選課須知</a>
+            </div>
+  
+            <div class="nav-item">
+              <a href="page_3.0.html" class="nav-link">院系/通識課程</a>
+              <div class="dropdown">
+                <a href="page_3.0.html" class="dropdown-item">設計學院</a>
+                <a href="page_3.0.html" class="dropdown-item">美術學院</a>
+                <a href="page_3.0.html" class="dropdown-item">傳播學院</a>
+                <a href="page_3.0.html" class="dropdown-item">表演學院</a>
+                <a href="page_3.0.html" class="dropdown-item">人文學院</a>
+                <a href="page_3.0.html" class="dropdown-item">體育學院</a>
+              </div>
+            </div>
+            <div class="nav-item">
+              <a href="./page_3.2.html" class="nav-link">&nbsp;&nbsp;&nbsp;&nbsp;課程討論</a>
+              <div class="dropdown">
+                <a href="./page_1.1.html" class="dropdown-item">討論區</a>
+                <a href="page_2.0.html" class="dropdown-item">最高評價</a>
+                <a href="page_1.0.html" class="dropdown-item">熱門討論</a>
+              </div>
+            </div>
+            <div class="nav-item">
+                <a href="./page_4.0.html" class="nav-link">換課區</a>
+                <div class="dropdown">
+                  <a href="./page_4.0.html" class="dropdown-item">許願</a>
+                  <a href="./page_4.1.html" class="dropdown-item">交換</a>
+                </div>
+              </div>
+            <a href="page_5.0.html" class="nav-link">登入</a>
+          </nav>
+  
+        </div>
+      </header>
+
+      <main class="main-content">
+        <div class="bread">
+          <a href="#" class="breadcrumb-item">
+            <img src="./img/home.png" alt="Home Icon" />
+            <span>首頁</span>
+          </a>
+          <span class="breadcrumb-separator">></span>
+          <a href="#" class="breadcrumb-item">
+            <span>選課須知</span>
+          </a>
+        </div>
+        <br />
+
+        <div class="credit-sorts">
+          <div class="sorts-text">
+            <h1>學分種類</h1>
+          </div>
+          <div class="credit-sorts-pic">
+            <img src="./img/sorts.png" />
+            <style>
+              .credit-sorts-pic img {
+                width: 100%;
+              }
+            </style>
+          </div>
+        </div>
+
+        <div class="department-credit">
+          <h1>各系科目學分表總覽</h1>
+        </div>
+
+        <div id="course-list" class="course-grid">
+          <!-- Course cards will be dynamically generated -->
+        </div>
+        <div class="schedule-time">
+          <h1>上課節次時間表</h1>
+          <img src="./img/schedule.png" />
+          <style>
+            div img {
+              width: 1230px;
+            }
+          </style>
+        </div>
+      </main>
+    </div>
+
+    <!-- 課程詳情彈出視窗 -->
+    <div id="courseModal" class="modal" style="display: none" >
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-body">
+          <div class="course-department"></div>
+          <h2 class="course-title"></h2>
+          <div class="course-rating02">
+            <div class="stars"></div>
+            <span class="rating-value"></span>
+            <span class="rating-count"></span>
+            <div class="course-teacher"></div>
+            <div class="course-schedule"></div>
+          </div>
+          <p class="course-description" onclick="location.href='https://aca.ntua.edu.tw/catalog.aspx?ca=209';"></p>
+          <div class="see-more">
+            <button onclick="location.href='https://aca.ntua.edu.tw/catalog.aspx?ca=209';">
+              點此前往連結
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 220307新北市板橋區大觀路一段59號&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;電話：02-2272-2181&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;學校網址：https://www.ntua.edu.tw/</p>
+    </footer>
+
+
+    <script src="./js/6.0.js"></script>
+  </body>
+</html>
